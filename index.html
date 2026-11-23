@@ -1,0 +1,504 @@
+<!doctype html><html><head><meta charset=utf8><meta name=viewport content="width=device-width,initial-scale=1,viewport-fit=cover"><style>:root{color-scheme:light;box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}html{scroll-padding-top:env(safe-area-inset-top,0px)}body{margin:0;padding:0;font:14px -apple-system,BlinkMacSystemFont,sans-serif;background:#fff;color:#000}img{max-width:100%}[hidden]:not([hidden=until-found i]){display:none!important}</style></head><body>
+<title>نقطة تحول</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans+Arabic:wght@400;500;700&display=swap" rel="stylesheet">
+<style>
+/* Layout: عمود واحد للموبايل، شاشة واحدة كل مرة، شريط تنقل سفلي. الأخضر هو اللون الأساسي والذهبي نقطة صغيرة بس. */
+:root{
+  --bg:#f6f4ee; --surface:#ffffff; --fg:#11291f; --muted:#5b6a61; --line:#e0dccf;
+  --green:#0f5c43; --green-ink:#ffffff; --gold:#d9a526; --soft:#e4eee7;
+  --font:'IBM Plex Sans Arabic',Tahoma,'Segoe UI',sans-serif;
+}
+@media (prefers-color-scheme: dark){
+  :root:not([data-theme="light"]){
+    --bg:#0d1a14; --surface:#14261d; --fg:#eaf1ec; --muted:#9db0a5; --line:#243a2f;
+    --green:#3dae84; --green-ink:#06150e; --gold:#e3b447; --soft:#183226; color-scheme:dark;
+  }
+}
+:root[data-theme="dark"]{
+  --bg:#0d1a14; --surface:#14261d; --fg:#eaf1ec; --muted:#9db0a5; --line:#243a2f;
+  --green:#3dae84; --green-ink:#06150e; --gold:#e3b447; --soft:#183226; color-scheme:dark;
+}
+*{box-sizing:border-box}
+body{
+  background:var(--bg); color:var(--fg); font-family:var(--font); font-size:16px; line-height:1.7; direction:rtl;
+  padding-left:max(16px,env(safe-area-inset-left,0px)); padding-right:max(16px,env(safe-area-inset-right,0px));
+}
+.wrap{max-width:520px; margin-inline:auto; padding-block:16px 40px; min-width:0}
+body.has-nav .wrap{padding-bottom:104px}
+h1,h2,h3,p{margin:0}
+h1,h2,h3{text-wrap:balance}
+
+.top{display:flex; align-items:center; justify-content:space-between; gap:12px; padding-bottom:24px}
+.brand{display:flex; align-items:center; gap:12px}
+.mark{width:40px; height:40px; border-radius:12px; background:var(--green); display:grid; place-items:center; flex:none}
+.mark i{width:12px; height:12px; border-radius:50%; background:var(--gold); display:block}
+.brand b{display:block; font-size:1.25rem; line-height:1.2}
+.brand small{display:block; font-size:.62rem; letter-spacing:.28em; color:var(--muted); direction:ltr; text-align:right}
+.chip{display:inline-flex; align-items:center; gap:6px; border-radius:999px; padding:2px 12px; font-size:.85rem; background:var(--soft); color:var(--green); font-weight:500; white-space:nowrap}
+
+.btn{display:inline-flex; align-items:center; justify-content:center; gap:10px; min-height:52px; padding:0 28px; border-radius:999px; border:0; font:inherit; font-weight:700; cursor:pointer; background:var(--green); color:var(--green-ink)}
+.btn.ghost{background:var(--surface); color:var(--fg); border:1px solid var(--line)}
+.btn.invert{background:var(--green-ink); color:var(--green)}
+.btn.block{width:100%}
+.btn[disabled]{opacity:.4; cursor:not-allowed}
+.link{background:none; border:0; padding:6px 0; font:inherit; color:var(--muted); cursor:pointer; text-decoration:underline; text-underline-offset:4px}
+button:focus-visible,textarea:focus-visible{outline:3px solid var(--gold); outline-offset:2px}
+@media (prefers-reduced-motion: no-preference){.btn,.opt,.tab{transition:background-color .15s,border-color .15s,opacity .15s}}
+
+/* Assistant / app-like home */
+.appbar{display:flex;justify-content:space-between;align-items:center;gap:8px;margin-bottom:18px}
+.account-actions{display:flex;gap:7px}
+.mini-btn{border:1px solid var(--line);background:var(--surface);color:var(--fg);border-radius:999px;padding:7px 12px;font:inherit;font-size:.82rem;cursor:pointer}
+.mini-btn.primary-mini{background:var(--green);color:var(--green-ink);border-color:var(--green)}
+.welcome-brand{display:flex;align-items:center;gap:10px;margin-bottom:18px}
+.welcome-brand b{display:block;font-size:1.05rem;line-height:1.2}
+.welcome-brand small{display:block;font-size:.58rem;letter-spacing:.22em;color:var(--muted);direction:ltr}
+.big-mark{width:46px;height:46px}
+.assistant-card{margin-top:28px;background:var(--surface);border:1px solid var(--line);border-radius:24px;padding:18px;box-shadow:0 8px 28px rgba(17,41,31,.06)}
+.assistant-head{display:flex;align-items:center;gap:12px;padding-bottom:15px;border-bottom:1px solid var(--line);margin-bottom:16px}
+.assistant-avatar{width:42px;height:42px;border-radius:14px;background:var(--soft);color:var(--green);display:grid;place-items:center;font-size:1.25rem;flex:none}
+.assistant-head b{display:block}
+.assistant-head span{display:block;color:var(--muted);font-size:.82rem;margin-top:2px}
+.assistant-card h3{font-size:1.08rem;margin-bottom:12px}
+.assistant-grid{display:grid;grid-template-columns:1fr 1fr;gap:9px}
+.assistant-opt{min-width:0;text-align:start;background:var(--bg);border:1px solid var(--line);border-radius:15px;padding:12px 10px;font:inherit;color:var(--fg);cursor:pointer}
+.assistant-opt b{display:block;font-size:.88rem;line-height:1.45}
+.assistant-opt span{display:block;color:var(--muted);font-size:.74rem;line-height:1.5;margin-top:3px}
+.assistant-opt:active,.assistant-free:active{transform:scale(.99)}
+.assistant-free{width:100%;margin-top:9px;border:1px dashed var(--green);background:var(--soft);color:var(--green);border-radius:15px;padding:12px;font:inherit;font-weight:700;cursor:pointer}
+@media(max-width:360px){.assistant-grid{grid-template-columns:1fr}.account-actions{gap:4px}.mini-btn{padding-inline:9px}}
+.pill{display:inline-flex; align-items:center; gap:8px; background:var(--surface); border:1px solid var(--line); border-radius:999px; padding:4px 16px; font-size:.9rem; color:var(--muted)}
+.pill i{width:8px; height:8px; border-radius:50%; background:var(--gold); display:block}
+.hero{font-size:clamp(2.1rem,10vw,3rem); line-height:1.2; font-weight:700; margin:20px 0 16px; letter-spacing:-.01em}
+.lead{color:var(--muted); font-size:1.08rem}
+.cta{display:flex; flex-direction:column; gap:10px; margin:28px 0 12px}
+.fine{font-size:.85rem; color:var(--muted)}
+
+.card{background:var(--surface); border:1px solid var(--line); border-radius:20px; padding:20px; min-width:0}
+.eyebrow{display:flex; justify-content:space-between; gap:12px; font-size:.82rem; color:var(--muted); margin-bottom:10px}
+.example{margin-top:36px}
+.example h3{font-size:1.15rem; line-height:1.6; margin-bottom:14px}
+.tags{display:flex; flex-wrap:wrap; gap:8px}
+.tag{border-radius:999px; padding:0 12px; font-size:.82rem; background:var(--soft); color:var(--green); font-weight:500}
+
+.how{margin-top:40px}
+.how h2{font-size:1.4rem; margin-bottom:8px}
+.how ol{list-style:none; margin:16px 0 0; padding:0; display:flex; flex-direction:column; gap:18px}
+.how li{display:flex; gap:14px}
+.num{width:34px; height:34px; border-radius:50%; background:var(--green); color:var(--green-ink); display:grid; place-items:center; font-weight:700; flex:none}
+.how b{display:block}
+.how span{color:var(--muted); font-size:.95rem}
+
+.qhead{display:flex; justify-content:space-between; align-items:center; margin-bottom:12px; font-size:.9rem; color:var(--muted)}
+.segs{display:flex; gap:6px; margin-bottom:24px}
+.segs span{flex:1; height:8px; border-radius:99px; background:var(--line)}
+.segs .d{background:var(--green)}
+.segs .c{background:var(--gold)}
+h2.q{font-size:1.6rem; line-height:1.35; margin-bottom:6px}
+.opts{display:flex; flex-direction:column; gap:10px; margin:22px 0}
+.opt{display:block; width:100%; text-align:start; background:var(--surface); border:1.5px solid var(--line); border-radius:16px; padding:14px 16px; font:inherit; color:inherit; cursor:pointer}
+.opt b{display:block}
+.opt span{display:block; color:var(--muted); font-size:.9rem}
+.opt[aria-pressed="true"]{border-color:var(--green); background:var(--soft)}
+
+.stepcard{background:var(--green); color:var(--green-ink); border-radius:24px; padding:24px; display:flex; flex-direction:column; gap:14px}
+.stepcard .meta{display:flex; flex-wrap:wrap; gap:8px; font-size:.85rem}
+.stepcard .meta span{border-radius:999px; padding:0 12px; background:color-mix(in srgb, currentColor 18%, transparent)}
+.stepcard h2{font-size:1.5rem; line-height:1.4}
+.stepcard p{opacity:.92}
+.tip{margin-top:16px; color:var(--muted); font-size:.92rem}
+.soft{margin-top:16px; padding:12px 16px; border-radius:14px; background:var(--soft); color:var(--green); font-size:.92rem}
+.dayline{display:flex; justify-content:space-between; font-size:.9rem; color:var(--muted); margin-bottom:10px}
+
+.feels{display:flex; gap:8px; margin:12px 0}
+.feels .opt{text-align:center; padding:10px 8px}
+textarea{display:block; width:100%; min-height:60px; border-radius:14px; border:1px solid var(--line); background:var(--bg); color:var(--fg); font:inherit; padding:12px; resize:vertical}
+.row{display:flex; gap:10px; margin-top:12px; flex-wrap:wrap; align-items:center}
+.done-card h3{font-size:1.2rem; margin-bottom:4px}
+.saved{margin-top:12px; padding-top:12px; border-top:1px solid var(--line); color:var(--muted); font-size:.95rem; overflow-wrap:anywhere}
+
+.list{margin:8px 0 0; padding:0; list-style:none}
+.item{display:flex; gap:14px; padding:14px 0; border-top:1px solid var(--line); min-width:0}
+.item:first-child{border-top:0}
+.idx{width:32px; height:32px; border-radius:50%; border:1.5px solid var(--line); display:grid; place-items:center; font-size:.9rem; flex:none; color:var(--muted)}
+.item.is-done .idx{background:var(--green); border-color:var(--green); color:var(--green-ink)}
+.item.is-now .idx{border-color:var(--gold); color:var(--fg); font-weight:700}
+.item .body{min-width:0; flex:1}
+.item b{display:block; line-height:1.5}
+.item small{display:block; color:var(--muted); font-size:.88rem; overflow-wrap:anywhere}
+.item.is-later b{color:var(--muted); font-weight:500}
+.plan-h{font-size:1.6rem; line-height:1.35; margin-bottom:4px}
+.summary-n{display:flex; gap:12px; margin:20px 0}
+.summary-n div{flex:1; background:var(--soft); border-radius:16px; padding:14px; text-align:center}
+.summary-n b{display:block; font-size:1.6rem; color:var(--green); line-height:1.3}
+.summary-n span{font-size:.85rem; color:var(--muted)}
+.note{margin-top:32px; font-size:.82rem; color:var(--muted)}
+.share{margin-top:24px}
+.share h3{font-size:1.1rem; margin-bottom:2px}
+.linkbox{display:block; width:100%; margin-top:12px; padding:10px 12px; border-radius:12px; border:1px solid var(--line); background:var(--bg); color:var(--fg); font:inherit; font-size:.82rem}
+
+.nav{position:fixed; inset-inline:0; bottom:0; z-index:5; background:var(--surface); border-top:1px solid var(--line);
+  padding:8px max(16px,env(safe-area-inset-left,0px)) calc(8px + env(safe-area-inset-bottom,0px)) max(16px,env(safe-area-inset-right,0px)); display:flex; justify-content:center}
+.nav[hidden]{display:none}
+.nav-in{display:flex; gap:8px; width:100%; max-width:520px}
+.tab{flex:1; min-height:48px; border-radius:14px; border:0; background:transparent; color:var(--muted); font:inherit; font-weight:500; cursor:pointer}
+.tab[aria-current="page"]{background:var(--soft); color:var(--green); font-weight:700}
+</style>
+
+<div id="app" class="wrap"></div>
+<nav id="nav" class="nav" hidden aria-label="التنقل"></nav>
+
+<script>
+(function(){
+document.documentElement.lang = 'ar';
+document.documentElement.dir = 'rtl';
+
+/* ---------- المحتوى ---------- */
+var AREAS = {
+  health: { name:'الصحة والطاقة', desc:'نوم، حركة، أكل من غير أنظمة قاسية.', steps:[
+    {t:'سجّل يومك زي ما هو', d:'اكتب نومك وأكلك وحركتك النهاردة لمدة {m}. من غير أحكام، تسجيل بس.', m:5},
+    {t:'اختار حاجة واحدة تعدلها', d:'نوم أو حركة أو أكل: اختار واحدة بس للأسبوع ده، واكتبها في سطر.', m:5},
+    {t:'ثبّت معاد نوم', d:'حدد معاد نوم قريب من معادك الحالي، وحط تنبيه قبله بنص ساعة.', m:5},
+    {t:'امشي {m}', d:'في أي وقت النهاردة، حتى لو جوه البيت أو في الشغل.', m:10},
+    {t:'بدّل مشروب واحد بمياه', d:'أول مشروب سكري تفكر فيه النهاردة، خليه كوباية مياه.', m:3},
+    {t:'جهّز أكلة بكرة', d:'حضّر حاجة صحية وسهلة دلوقتي عشان ماتقررش وانت جعان.', m:10},
+    {t:'راجع أسبوعك', d:'إيه اللي نفع وإيه اللي صعب؟ اختار عادة واحدة تكمل بيها.', m:7}
+  ]},
+  work: { name:'الشغل والمهنة', desc:'تحديد اتجاه، مهارة جديدة، أو خطوة في مسارك.', steps:[
+    {t:'صوّر شغلك الحالي', d:'اكتب في ٣ سطور: بتعمل إيه، إيه اللي بتحبه فيه، وإيه اللي مضايقك.', m:7},
+    {t:'حدد سؤالك', d:'اكتب سؤال واحد عايز تعرف إجابته. مثلًا: أكمل مكاني ولا أغيّر؟', m:5},
+    {t:'اعرف مهاراتك', d:'اكتب ٣ مهارات عندك، ومهارة واحدة ناقصاك للمكان اللي عايز توصله.', m:10},
+    {t:'دوّر على نماذج', d:'افتح ٣ إعلانات شغل أو ملفات ناس في المجال اللي عايزه، وسجّل المهارات اللي بتتكرر.', m:15},
+    {t:'اسأل حد سبقك', d:'ابعت رسالة قصيرة لحد شغال في المجال ده، واسأله سؤال واحد محدد.', m:10},
+    {t:'اتعلم أول جزء', d:'خصص {m} للمهارة الناقصة: أول درس أو أول مقال بس.', m:20},
+    {t:'راجع وخطط للشهر', d:'اكتب خطوتك الجاية للشهر ده، وخطوة واحدة تبدأ بيها.', m:10}
+  ]},
+  relationships: { name:'العلاقات', desc:'حدود أوضح، تواصل أصدق، ومساحة لنفسك.', steps:[
+    {t:'اختار علاقة', d:'اكتب اسم شخص علاقتك بيه مهمة، وإيه اللي ناقص أو مضايقك فيها.', m:5},
+    {t:'حدد اللي محتاجه', d:'اكتب في سطر واحد: إيه اللي محتاج تقوله أو تسمعه من الطرف التاني؟', m:5},
+    {t:'صيغ جملة صريحة', d:'اكتب: أنا بحس ... لما ... وأنا محتاج ... من غير لوم.', m:7},
+    {t:'ابعت رسالة دفا', d:'رسالة قصيرة لشخص بتحبه من غير سبب ولا طلب.', m:5},
+    {t:'حدد حد واحد', d:'اختار حد صغير ومعقول، وقوله بهدوء أو اكتبه لنفسك لو لسه.', m:7},
+    {t:'وقت لنفسك', d:'خصص {m} لوحدك، بعيد عن الموبايل لو تقدر.', m:20},
+    {t:'راجع علاقتك', d:'إيه اللي اتغير؟ وإيه اللي لسه محتاج كلام؟ اكتب خطوتك الجاية.', m:7}
+  ]},
+  money: { name:'المال', desc:'أول نظرة حقيقية على فلوسك، وخطة تبدأ صغيرة.', steps:[
+    {t:'شوف رقمك الحقيقي', d:'اعرف كام معاك دلوقتي في كل الحسابات والكاش، واكتب الرقم بس.', m:5},
+    {t:'اكتب مصاريفك الثابتة', d:'إيجار، فواتير، أقساط، اشتراكات. حاجة تحت التانية.', m:10},
+    {t:'تتبع آخر ٧ أيام', d:'افتح كشف الحساب أو الإيصالات وسجّل اللي صرفته الأسبوع اللي فات.', m:15},
+    {t:'اختار مصروف تقلله', d:'حاجة واحدة بس، حتى لو الفرق صغير.', m:5},
+    {t:'احجز مبلغ صغير', d:'اختار مبلغ تقدر عليه من غير ما يأثر على يومك، وافصله على جنب.', m:5},
+    {t:'اكتب هدف مالي', d:'هدف واحد، بمبلغ وتاريخ.', m:10},
+    {t:'راجع واختار عادة', d:'اختار عادة مالية واحدة تكمل بيها الشهر ده.', m:7}
+  ]},
+  calm: { name:'الهدوء النفسي', desc:'تقليل التشتت، وتفريغ اللي شايله جواك.', steps:[
+    {t:'فرّغ دماغك', d:'اكتب كل اللي شاغلك لمدة {m} من غير ترتيب ولا تصحيح.', m:5},
+    {t:'اختار ٣ بس', d:'من القايمة، علّم أهم ٣ حاجات. الباقي يستنى لبكرة.', m:5},
+    {t:'قلل المشتتات', d:'اقفل إشعارات تطبيقين بيسحبوا انتباهك.', m:3},
+    {t:'تنفس ببطء', d:'اتنفس لمدة {m}: شهيق أربع ثواني وزفير ست ثواني.', m:3},
+    {t:'ابعد عن الشاشة', d:'قف عند الشباك أو في الشارع {m} من غير موبايل.', m:10},
+    {t:'حدد ساعة بلا شاشات', d:'اختار ساعة في يومك تبقى من غير شاشات، واكتب معادها.', m:5},
+    {t:'راجع اللي هداك', d:'إيه الخطوة اللي حسيت بعدها براحة؟ كمّل بيها.', m:7}
+  ]}
+};
+var BLOCKERS = [
+  {id:'start', l:'مش عارف أبدأ منين', tip:'أول خطوة صغيرة عن قصد. ماتفكرش في اللي بعدها.'},
+  {id:'time', l:'مفيش عندي وقت', tip:'كل خطوة مظبوطة على وقتك وعمرها ما هتزيد عنه.'},
+  {id:'quit', l:'بتحمس وبعدين بقف', tip:'لو فاتك يوم، كمّل من نفس الخطوة. مفيش بداية من الصفر.'},
+  {id:'fear', l:'خايف أغلط', tip:'كل خطوة هنا تجربة صغيرة، وتقدر ترجع عنها.'},
+  {id:'focus', l:'مشتت', tip:'قدامك خطوة واحدة بس في كل مرة. الباقي يستنى.'}
+];
+var TIMES = [5,10,20,30];
+var FEELS = ['خفيف','عادي','تقيل'];
+
+/* ---------- أدوات ---------- */
+function N(n){ return Number(n).toLocaleString('ar-EG'); }
+function label(m){ return m <= 10 ? N(m) + ' دقايق' : N(m) + ' دقيقة'; }
+function esc(s){ return String(s).replace(/[&<>"']/g,function(c){ return {'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]; }); }
+function pad(n){ return String(n).padStart(2,'0'); }
+function dayStr(d){ d = d || new Date(); return d.getFullYear() + '-' + pad(d.getMonth()+1) + '-' + pad(d.getDate()); }
+function yesterdayStr(){ var d = new Date(); d.setDate(d.getDate()-1); return dayStr(d); }
+function stepOf(i){
+  var s = AREAS[state.area].steps[i];
+  var m = Math.max(3, Math.min(s.m, state.mins));
+  var lb = label(m);
+  return { t: s.t.replace('{m}', lb), d: s.d.replace('{m}', lb), m: m, lb: lb };
+}
+function streak(){
+  var days = {}; (state.days || []).forEach(function(x){ days[x] = 1; });
+  var d = new Date(); if(!days[dayStr(d)]) d.setDate(d.getDate()-1);
+  var n = 0; while(days[dayStr(d)]){ n++; d.setDate(d.getDate()-1); }
+  return n;
+}
+
+/* ---------- الحفظ (على الجهاز ده بس) ---------- */
+var KEY = 'noktat-tahawul-v1', mem = null;
+function valid(s){ return s && AREAS[s.area] && Array.isArray(s.steps) && s.steps.length === 7 && typeof s.mins === 'number'; }
+function load(){
+  try { var r = localStorage.getItem(KEY); var s = r ? JSON.parse(r) : null; return valid(s) ? s : null; }
+  catch(e){ return valid(mem) ? mem : null; }
+}
+function save(){ try { localStorage.setItem(KEY, JSON.stringify(state)); } catch(e){ mem = state; } }
+function clearSaved(){ try { localStorage.removeItem(KEY); } catch(e){} mem = null; }
+
+var state = load();
+var ui = { screen: state ? 'today' : 'welcome', q: 0, draft: {}, fresh: false, confirm: false, feel: null, noteDraft: '', prevDays: [] };
+
+var QUIZ = [
+  { key:'area', t:'عايز تغيّر إيه؟', s:'ابدأ بمجال واحد بس. مش لازم تغيّر حياتك كلها مرة واحدة.',
+    opts: Object.keys(AREAS).map(function(id){ return { id:id, l:AREAS[id].name, d:AREAS[id].desc }; }) },
+  { key:'mins', t:'معاك كام دقيقة في اليوم؟', s:'هنظبط كل خطوة على وقتك.',
+    opts: TIMES.map(function(m){ return { id:m, l:label(m), d:'' }; }) },
+  { key:'blocker', t:'إيه أكتر حاجة بتوقفك؟', s:'اختار الأقرب ليك.',
+    opts: BLOCKERS.map(function(b){ return { id:b.id, l:b.l, d:'' }; }) }
+];
+
+/* ---------- الشاشات ---------- */
+function header(){
+  var s = state ? streak() : 0;
+  return '<div class="top"><div class="brand"><div class="mark"><i></i></div><div><b>نقطة تحول</b><small>NOKTAT TAHAWUL</small></div></div>' +
+    (s > 0 ? '<span class="chip">' + N(s) + (s === 1 ? ' يوم' : s <= 10 ? ' أيام متتالية' : ' يوم متتالي') + '</span>' : '') + '</div>';
+}
+
+function welcome(){
+  return '<div class="appbar">' +
+    '<button class="mini-btn" data-act="lang" aria-label="تغيير اللغة">EN</button>' +
+    '<div class="account-actions"><button class="mini-btn" data-act="login">دخول</button><button class="mini-btn primary-mini" data-act="signup">إنشاء حساب</button></div>' +
+    '</div>' +
+    '<div class="welcome-brand"><div class="mark big-mark"><i></i></div><div><b>نقطة تحول</b><small>NOKTAT TAHAWUL</small></div></div>' +
+    '<span class="pill"><i></i>مش تطبيق تحفيز. تطبيق خطوات.</span>' +
+    '<h1 class="hero">كل تغيير كبير يبدأ بنقطة واحدة</h1>' +
+    '<p class="lead">مش محتاج نصيحة جديدة... محتاج تعرف تبدأ منين. المساعد يفهم وضعك، ويحوّل هدفك لأول خطوة تقدر تنفذها.</p>' +
+    '<div class="cta"><button class="btn block" data-act="start">ابدأ نقطة التحول ←</button>' +
+    '<p class="fine">مجاني · مساعد شخصي · أول خطوة واضحة</p></div>' +
+    '<div class="assistant-card">' +
+      '<div class="assistant-head"><div class="assistant-avatar">✦</div><div><b>مساعد نقطة تحول</b><span>هساعدك تحدد البداية، مش هديك كلام عام.</span></div></div>' +
+      '<h3>المساعد يقدر يساعدك في إيه؟</h3>' +
+      '<div class="assistant-grid">' +
+        '<button class="assistant-opt" data-act="assistant" data-val="work"><b>💼 الشغل والمهنة</b><span>وظيفة، تغيير مسار، مهارة</span></button>' +
+        '<button class="assistant-opt" data-act="assistant" data-val="money"><b>💰 المال والدخل</b><span>ترتيب وضعك وأول خطوة</span></button>' +
+        '<button class="assistant-opt" data-act="assistant" data-val="learn"><b>📚 التعلم والتطوير</b><span>اختيار مهارة والبدء فيها</span></button>' +
+        '<button class="assistant-opt" data-act="assistant" data-val="calm"><b>🧠 الهدوء والتشتت</b><span>تقليل التشتت وترتيب اليوم</span></button>' +
+        '<button class="assistant-opt" data-act="assistant" data-val="relationships"><b>❤️ العلاقات</b><span>تواصل وحدود أوضح</span></button>' +
+        '<button class="assistant-opt" data-act="assistant" data-val="goal"><b>🎯 هدف مش عارف تبدأه</b><span>نحوّل الهدف لأول خطوة</span></button>' +
+      '</div>' +
+      '<button class="assistant-free" data-act="assistant" data-val="other">❓ مش عارف أبدأ منين</button>' +
+    '</div>' +
+    '<div class="card example"><div class="eyebrow"><span>مثال لخطوة النهاردة</span><span>١ من ٧ خطوات</span></div>' +
+    '<h3>اكتب ٣ حاجات مضايقاك في يومك، وجنب كل واحدة أول حل ممكن</h3>' +
+    '<div class="tags"><span class="tag">٥ دقايق</span><span class="tag">الهدوء النفسي</span></div></div>' +
+    '<div class="how"><h2>من حيرة كبيرة لخطوة واحدة واضحة</h2><ol>' +
+    '<li><span class="num">١</span><div><b>قولنا إنت فين دلوقتي</b><span>٣ أسئلة قصيرة عن المجال ووقتك وإيه اللي بيوقفك.</span></div></li>' +
+    '<li><span class="num">٢</span><div><b>المساعد يحدد معاك البداية</b><span>مش نصيحة عامة؛ خطوة مناسبة لوضعك ووقتك.</span></div></li>' +
+    '<li><span class="num">٣</span><div><b>تنفذ وتتابع تقدمك</b><span>تعلّم إن الخطوة تمت، وتكمل من النقطة اللي وصلت لها.</span></div></li>' +
+    '</ol></div>';
+}
+
+function quiz(){
+  var q = QUIZ[ui.q], cur = ui.draft[q.key];
+  var segs = '';
+  for(var i = 0; i < 3; i++) segs += '<span class="' + (i < ui.q ? 'd' : i === ui.q ? 'c' : '') + '"></span>';
+  var opts = q.opts.map(function(o){
+    return '<button class="opt" data-act="pick" data-val="' + esc(o.id) + '" aria-pressed="' + (String(cur) === String(o.id)) + '"><b>' + esc(o.l) + '</b>' + (o.d ? '<span>' + esc(o.d) + '</span>' : '') + '</button>';
+  }).join('');
+  return '<div class="qhead"><button class="link" data-act="qback">رجوع</button><span>سؤال ' + N(ui.q+1) + ' من ' + N(3) + '</span></div>' +
+    '<div class="segs">' + segs + '</div>' +
+    '<h2 class="q">' + q.t + '</h2><p class="lead">' + q.s + '</p>' +
+    '<div class="opts">' + opts + '</div>' +
+    '<button class="btn block" data-act="qnext"' + (cur === undefined ? ' disabled' : '') + '>' + (ui.q < 2 ? 'التالي ←' : 'اعمل خطتي') + '</button>';
+}
+
+function segsHTML(done, now){
+  var h = '';
+  for(var i = 0; i < 7; i++) h += '<span class="' + (i < done ? 'd' : i === now ? 'c' : '') + '"></span>';
+  return '<div class="segs">' + h + '</div>';
+}
+
+function planView(){
+  var done = state.steps.filter(function(s){ return s.done; }).length;
+  var blocker = BLOCKERS.filter(function(b){ return b.id === state.blocker; })[0];
+  var items = state.steps.map(function(st, i){
+    var s = stepOf(i);
+    var cls = st.done ? 'is-done' : i === done ? 'is-now' : 'is-later';
+    var show = st.done || i === done;
+    var extra = '';
+    if(st.done && st.feel) extra += '<small>حسيت: ' + esc(st.feel) + '</small>';
+    return '<li class="item ' + cls + '"><span class="idx">' + (st.done ? '✓' : N(i+1)) + '</span><div class="body"><b>' + esc(s.t) + '</b>' +
+      (show ? '<small>' + esc(s.d) + '</small>' : '') + '<small>' + esc(s.lb) + '</small>' + extra + '</div></li>';
+  }).join('');
+  var foot;
+  if(ui.fresh){
+    foot = '<div class="cta"><button class="btn block" data-act="begin">ابدأ أول خطوة ←</button></div>';
+  } else if(ui.confirm){
+    foot = '<div class="soft">هتبدأ خطة جديدة، والخطة الحالية هتتمسح. متأكد؟</div><div class="row"><button class="btn ghost" data-act="resetno">لا، كمّل</button><button class="btn" data-act="resetyes">آه، ابدأ خطة جديدة</button></div>';
+  } else {
+    foot = '<div class="row"><button class="link" data-act="reset">ابدأ خطة جديدة</button></div>';
+  }
+  return (ui.fresh ? '<span class="chip">خطتك جاهزة</span>' : '') +
+    '<h2 class="plan-h" style="margin-top:12px">' + esc(AREAS[state.area].name) + '</h2>' +
+    '<p class="lead">٧ خطوات · لحد ' + label(state.mins) + ' في اليوم</p>' +
+    (blocker ? '<div class="soft">' + esc(blocker.l) + '؟ ' + esc(blocker.tip) + '</div>' : '') +
+    '<div class="card" style="margin-top:16px"><ul class="list">' + items + '</ul></div>' + foot + (ui.fresh ? '' : shareCard());
+}
+
+function reflection(idx){
+  var feels = FEELS.map(function(f){ return '<button class="opt" data-act="feel" data-val="' + f + '" aria-pressed="' + (ui.feel === f) + '">' + f + '</button>'; }).join('');
+  return '<div class="card done-card" style="margin-top:16px"><h3>حسيت بإيه بعد الخطوة؟</h3><p class="fine">اختياري، بس بيساعدك تشوف تقدمك بعدين.</p>' +
+    '<div class="feels">' + feels + '</div>' +
+    '<textarea id="note" maxlength="500" placeholder="ملاحظة قصيرة لنفسك (اختياري)">' + esc(ui.noteDraft) + '</textarea>' +
+    '<div class="row"><button class="btn" data-act="saveref">احفظ</button><button class="link" data-act="skipref">تخطي</button></div></div>';
+}
+
+function todayView(){
+  var done = state.steps.filter(function(s){ return s.done; }).length;
+  var last = done > 0 ? state.steps[done-1] : null;
+  if(done === 7){
+    if(!last.reflected) return '<h2 class="plan-h">خلصت آخر خطوة</h2><p class="lead">قبل الملخص، قولنا حسيت بإيه.</p>' + reflection(6);
+    return summary();
+  }
+  var lockedToday = last && last.doneDay === dayStr() && state.unlockIdx !== done;
+  if(lockedToday){
+    var s = stepOf(done-1);
+    var saved = '';
+    if(last.reflected){
+      saved = '<div class="saved">' + (last.feel ? 'حسيت: ' + esc(last.feel) : 'من غير تقييم') + (last.note ? '<br>' + esc(last.note) : '') + '</div>';
+    }
+    return '<div class="dayline"><span>خلصت ' + N(done) + ' من ٧</span></div>' + segsHTML(done, -1) +
+      '<div class="card done-card"><div class="eyebrow"><span>خطوة النهاردة تمت</span></div><h3>' + esc(s.t) + '</h3><p class="fine">الخطوة الجاية (' + N(done+1) + ') بتفتح بكرة. ارتاح النهاردة.</p>' + saved + '</div>' +
+      (last.reflected ? '' : reflection(done-1)) +
+      '<div class="row" style="margin-top:16px"><button class="link" data-act="unlock">عايز أكمل النهاردة، افتح الخطوة الجاية</button></div>';
+  }
+  var s2 = stepOf(done);
+  var blocker = BLOCKERS.filter(function(b){ return b.id === state.blocker; })[0];
+  var missed = last && last.doneDay < yesterdayStr();
+  return '<div class="dayline"><span>الخطوة ' + N(done+1) + ' من ' + N(7) + '</span><span>' + esc(AREAS[state.area].name) + '</span></div>' + segsHTML(done, done) +
+    '<div class="stepcard"><div class="meta"><span>' + esc(s2.lb) + '</span></div><h2>' + esc(s2.t) + '</h2><p>' + esc(s2.d) + '</p>' +
+    '<button class="btn invert block" data-act="done">نفذت الخطوة</button></div>' +
+    (missed ? '<div class="soft">فاتك كام يوم؟ عادي. كمّل من نفس الخطوة.</div>' : '') +
+    (blocker ? '<p class="tip">' + esc(blocker.tip) + '</p>' : '');
+}
+
+function summary(){
+  var items = state.steps.map(function(st, i){
+    var s = stepOf(i);
+    return '<li class="item is-done"><span class="idx">✓</span><div class="body"><b>' + esc(s.t) + '</b>' +
+      (st.feel ? '<small>حسيت: ' + esc(st.feel) + '</small>' : '') + (st.note ? '<small>' + esc(st.note) + '</small>' : '') + '</div></li>';
+  }).join('');
+  var uniq = {}; state.steps.forEach(function(s){ if(s.doneDay) uniq[s.doneDay] = 1; });
+  return '<span class="chip">الخطة اكتملت</span><h2 class="plan-h" style="margin-top:12px">خلصت الـ٧ خطوات</h2>' +
+    '<p class="lead">بدأت من نقطة واحدة في ' + esc(AREAS[state.area].name) + '، وبقى عندك ٧ خطوات اتنفذت فعلًا.</p>' +
+    '<div class="summary-n"><div><b>' + N(7) + '</b><span>خطوات</span></div><div><b>' + N(Object.keys(uniq).length) + '</b><span>أيام نشاط</span></div></div>' +
+    '<div class="card"><ul class="list">' + items + '</ul></div>' +
+    shareCard() +
+    '<div class="cta"><button class="btn block" data-act="newplan">ابدأ نقطة تحول جديدة ←</button></div>';
+}
+
+var SHARE_URL = 'https://claude.ai/artifact/CDvQdQyYfnt7KuFQkdRciw';
+var SHARE_MSG = 'جرّبت تطبيق نقطة تحول: بيديك خطة ٧ خطوات صغيرة وتنفذ خطوة كل يوم.\n';
+function shareCard(){
+  return '<div class="card share"><h3>شارك نقطة تحول مع حد بتحبه</h3><p class="fine">كل واحد بيبدأ خطته الخاصة، وتقدمه بيتحفظ عنده هو.</p>' +
+    '<input id="sharelink" class="linkbox" readonly dir="ltr" value="' + esc(SHARE_URL) + '" aria-label="رابط التطبيق">' +
+    '<div class="row"><button class="btn" data-act="copy">' + (ui.copied ? 'تم النسخ ✓' : 'انسخ رسالة المشاركة') + '</button></div></div>';
+}
+
+var NOTE = '<p class="note">نقطة تحول بتساعدك تبدأ بخطوات عملية بسيطة، وهي مش بديل عن متخصص. لو تعبان نفسيًا فعلًا، كلّم متخصص أو حد قريب منك.</p>';
+
+function render(){
+  var app = document.getElementById('app'), nav = document.getElementById('nav');
+  var inApp = !!state && (ui.screen === 'today' || ui.screen === 'plan');
+  document.body.classList.toggle('has-nav', inApp);
+  var body = '';
+  if(ui.screen === 'welcome') body = welcome();
+  else if(ui.screen === 'quiz') body = quiz();
+  else if(ui.screen === 'plan') body = planView();
+  else body = todayView();
+  app.innerHTML = header() + body + NOTE;
+  nav.hidden = !inApp;
+  nav.innerHTML = inApp ? '<div class="nav-in"><button class="tab" data-act="tab" data-val="today"' + (ui.screen === 'today' ? ' aria-current="page"' : '') + '>اليوم</button>' +
+    '<button class="tab" data-act="tab" data-val="plan"' + (ui.screen === 'plan' ? ' aria-current="page"' : '') + '>خطتي</button></div>' : '';
+}
+function go(screen){ ui.screen = screen; render(); try { window.scrollTo(0,0); } catch(e){} }
+
+function startNewPlan(){
+  ui.prevDays = state ? (state.days || []) : [];
+  state = null; clearSaved();
+  ui.draft = {}; ui.q = 0; ui.confirm = false; ui.fresh = false;
+  go('quiz');
+}
+function readNote(){ var ta = document.getElementById('note'); if(ta) ui.noteDraft = ta.value; }
+function finishReflection(withValues){
+  var done = state.steps.filter(function(s){ return s.done; }).length;
+  var st = state.steps[done-1];
+  if(withValues){ readNote(); st.feel = ui.feel || null; st.note = (ui.noteDraft || '').trim().slice(0,500); }
+  st.reflected = true; ui.feel = null; ui.noteDraft = '';
+  save(); render();
+}
+
+function act(a, val){
+  if(a === 'lang'){
+    alert('اللغة الحالية: العربية\nسنضيف تبديل العربية / English في الخطوة التالية.');
+  }
+  else if(a === 'login'){
+    alert('تسجيل الدخول سيتم ربطه بـ Firebase Authentication.');
+  }
+  else if(a === 'signup'){
+    alert('إنشاء الحساب سيتم ربطه بـ Firebase Authentication.');
+  }
+  else if(a === 'assistant'){
+    if(val === 'work') ui.draft = {area:'work'};
+    else if(val === 'money') ui.draft = {area:'money'};
+    else if(val === 'relationships') ui.draft = {area:'relationships'};
+    else if(val === 'calm') ui.draft = {area:'calm'};
+    else ui.draft = {};
+    ui.q = 0; go('quiz');
+  }
+  else if(a === 'start'){ ui.draft = {}; ui.q = 0; go('quiz'); }
+  else if(a === 'pick'){ var key = QUIZ[ui.q].key; ui.draft[key] = key === 'mins' ? parseInt(val,10) : val; render(); }
+  else if(a === 'qback'){ if(ui.q > 0){ ui.q--; render(); } else go('welcome'); }
+  else if(a === 'qnext'){
+    if(ui.q < 2){ ui.q++; render(); return; }
+    state = { area: ui.draft.area, mins: ui.draft.mins, blocker: ui.draft.blocker, days: ui.prevDays || [], unlockIdx: -1,
+      steps: [{},{},{},{},{},{},{}] };
+    save(); ui.fresh = true; go('plan');
+  }
+  else if(a === 'begin'){ ui.fresh = false; go('today'); }
+  else if(a === 'tab'){ ui.confirm = false; go(val); }
+  else if(a === 'done'){
+    var i = state.steps.filter(function(s){ return s.done; }).length;
+    var d = dayStr();
+    state.steps[i] = { done: true, doneDay: d };
+    state.days = state.days || [];
+    if(state.days.indexOf(d) < 0) state.days.push(d);
+    ui.feel = null; ui.noteDraft = '';
+    save(); render(); try { window.scrollTo(0,0); } catch(e){}
+  }
+  else if(a === 'feel'){ readNote(); ui.feel = (ui.feel === val ? null : val); render(); }
+  else if(a === 'saveref'){ finishReflection(true); }
+  else if(a === 'skipref'){ finishReflection(false); }
+  else if(a === 'unlock'){ state.unlockIdx = state.steps.filter(function(s){ return s.done; }).length; save(); render(); try { window.scrollTo(0,0); } catch(e){} }
+  else if(a === 'reset'){ ui.confirm = true; render(); }
+  else if(a === 'resetno'){ ui.confirm = false; render(); }
+  else if(a === 'copy'){
+    var txt = SHARE_MSG + SHARE_URL;
+    var ok = function(){ ui.copied = true; render(); setTimeout(function(){ ui.copied = false; render(); }, 2500); };
+    var fb = function(){ var i = document.getElementById('sharelink'); if(i){ i.focus(); i.select(); } };
+    try { navigator.clipboard.writeText(txt).then(ok, fb); } catch(e){ fb(); }
+  }
+  else if(a === 'resetyes' || a === 'newplan'){ startNewPlan(); }
+}
+
+document.addEventListener('click', function(e){
+  var b = e.target.closest ? e.target.closest('[data-act]') : null;
+  if(!b || b.disabled) return;
+  act(b.getAttribute('data-act'), b.getAttribute('data-val'));
+});
+
+window.__noktat = { act: act, render: render, getState: function(){ return state; } };
+render();
+})();
+</script>
+
+</body></html>
