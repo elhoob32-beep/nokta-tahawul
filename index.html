@@ -1,504 +1,61 @@
-<!doctype html><html><head><meta charset=utf8><meta name=viewport content="width=device-width,initial-scale=1,viewport-fit=cover"><style>:root{color-scheme:light;box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}html{scroll-padding-top:env(safe-area-inset-top,0px)}body{margin:0;padding:0;font:14px -apple-system,BlinkMacSystemFont,sans-serif;background:#fff;color:#000}img{max-width:100%}[hidden]:not([hidden=until-found i]){display:none!important}</style></head><body>
+<!doctype html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="theme-color" content="#1F6F6B">
+<meta name="description" content="نقطة تحول: بداية جديدة لشخص محتاج يعرف يبدأ منين.">
+<meta name="mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-title" content="نقطة تحول">
+<meta name="apple-mobile-web-app-status-bar-style" content="default">
+<link rel="manifest" href="manifest.webmanifest">
+<link rel="icon" type="image/png" href="icons/icon-192.png">
+<link rel="apple-touch-icon" href="icons/apple-touch-icon.png">
+<style>:root{color-scheme:light;padding-top:env(safe-area-inset-top,0px)}body{margin:0}img{max-width:100%}[hidden]{display:none!important}</style>
 <title>نقطة تحول</title>
-<meta name="claude:viewport-fit-sides" content="cover">
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans+Arabic:wght@400;500;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans+Arabic:wght@400;500;600&family=Readex+Pro:wght@500;600&display=swap">
 <style>
-/* Layout: عمود واحد للموبايل، شاشة واحدة كل مرة، شريط تنقل سفلي. الأخضر هو اللون الأساسي والذهبي نقطة صغيرة بس. */
-:root{
-  --bg:#f6f4ee; --surface:#ffffff; --fg:#11291f; --muted:#5b6a61; --line:#e0dccf;
-  --green:#0f5c43; --green-ink:#ffffff; --gold:#d9a526; --soft:#e4eee7;
-  --font:'IBM Plex Sans Arabic',Tahoma,'Segoe UI',sans-serif;
-}
-@media (prefers-color-scheme: dark){
-  :root:not([data-theme="light"]){
-    --bg:#0d1a14; --surface:#14261d; --fg:#eaf1ec; --muted:#9db0a5; --line:#243a2f;
-    --green:#3dae84; --green-ink:#06150e; --gold:#e3b447; --soft:#183226; color-scheme:dark;
-  }
-}
-:root[data-theme="dark"]{
-  --bg:#0d1a14; --surface:#14261d; --fg:#eaf1ec; --muted:#9db0a5; --line:#243a2f;
-  --green:#3dae84; --green-ink:#06150e; --gold:#e3b447; --soft:#183226; color-scheme:dark;
-}
-*{box-sizing:border-box}
-body{
-  background:var(--bg); color:var(--fg); font-family:var(--font); font-size:16px; line-height:1.7; direction:rtl;
-  padding-left:max(16px,env(safe-area-inset-left,0px)); padding-right:max(16px,env(safe-area-inset-right,0px));
-}
-.wrap{max-width:520px; margin-inline:auto; padding-block:16px 40px; min-width:0}
-body.has-nav .wrap{padding-bottom:104px}
-h1,h2,h3,p{margin:0}
-h1,h2,h3{text-wrap:balance}
-
-.top{display:flex; align-items:center; justify-content:space-between; gap:12px; padding-bottom:24px}
-.brand{display:flex; align-items:center; gap:12px}
-.mark{width:40px; height:40px; border-radius:12px; background:var(--green); display:grid; place-items:center; flex:none}
-.mark i{width:12px; height:12px; border-radius:50%; background:var(--gold); display:block}
-.brand b{display:block; font-size:1.25rem; line-height:1.2}
-.brand small{display:block; font-size:.62rem; letter-spacing:.28em; color:var(--muted); direction:ltr; text-align:right}
-.chip{display:inline-flex; align-items:center; gap:6px; border-radius:999px; padding:2px 12px; font-size:.85rem; background:var(--soft); color:var(--green); font-weight:500; white-space:nowrap}
-
-.btn{display:inline-flex; align-items:center; justify-content:center; gap:10px; min-height:52px; padding:0 28px; border-radius:999px; border:0; font:inherit; font-weight:700; cursor:pointer; background:var(--green); color:var(--green-ink)}
-.btn.ghost{background:var(--surface); color:var(--fg); border:1px solid var(--line)}
-.btn.invert{background:var(--green-ink); color:var(--green)}
-.btn.block{width:100%}
-.btn[disabled]{opacity:.4; cursor:not-allowed}
-.link{background:none; border:0; padding:6px 0; font:inherit; color:var(--muted); cursor:pointer; text-decoration:underline; text-underline-offset:4px}
-button:focus-visible,textarea:focus-visible{outline:3px solid var(--gold); outline-offset:2px}
-@media (prefers-reduced-motion: no-preference){.btn,.opt,.tab{transition:background-color .15s,border-color .15s,opacity .15s}}
-
-/* Assistant / app-like home */
-.appbar{display:flex;justify-content:space-between;align-items:center;gap:8px;margin-bottom:18px}
-.account-actions{display:flex;gap:7px}
-.mini-btn{border:1px solid var(--line);background:var(--surface);color:var(--fg);border-radius:999px;padding:7px 12px;font:inherit;font-size:.82rem;cursor:pointer}
-.mini-btn.primary-mini{background:var(--green);color:var(--green-ink);border-color:var(--green)}
-.welcome-brand{display:flex;align-items:center;gap:10px;margin-bottom:18px}
-.welcome-brand b{display:block;font-size:1.05rem;line-height:1.2}
-.welcome-brand small{display:block;font-size:.58rem;letter-spacing:.22em;color:var(--muted);direction:ltr}
-.big-mark{width:46px;height:46px}
-.assistant-card{margin-top:28px;background:var(--surface);border:1px solid var(--line);border-radius:24px;padding:18px;box-shadow:0 8px 28px rgba(17,41,31,.06)}
-.assistant-head{display:flex;align-items:center;gap:12px;padding-bottom:15px;border-bottom:1px solid var(--line);margin-bottom:16px}
-.assistant-avatar{width:42px;height:42px;border-radius:14px;background:var(--soft);color:var(--green);display:grid;place-items:center;font-size:1.25rem;flex:none}
-.assistant-head b{display:block}
-.assistant-head span{display:block;color:var(--muted);font-size:.82rem;margin-top:2px}
-.assistant-card h3{font-size:1.08rem;margin-bottom:12px}
-.assistant-grid{display:grid;grid-template-columns:1fr 1fr;gap:9px}
-.assistant-opt{min-width:0;text-align:start;background:var(--bg);border:1px solid var(--line);border-radius:15px;padding:12px 10px;font:inherit;color:var(--fg);cursor:pointer}
-.assistant-opt b{display:block;font-size:.88rem;line-height:1.45}
-.assistant-opt span{display:block;color:var(--muted);font-size:.74rem;line-height:1.5;margin-top:3px}
-.assistant-opt:active,.assistant-free:active{transform:scale(.99)}
-.assistant-free{width:100%;margin-top:9px;border:1px dashed var(--green);background:var(--soft);color:var(--green);border-radius:15px;padding:12px;font:inherit;font-weight:700;cursor:pointer}
-@media(max-width:360px){.assistant-grid{grid-template-columns:1fr}.account-actions{gap:4px}.mini-btn{padding-inline:9px}}
-.pill{display:inline-flex; align-items:center; gap:8px; background:var(--surface); border:1px solid var(--line); border-radius:999px; padding:4px 16px; font-size:.9rem; color:var(--muted)}
-.pill i{width:8px; height:8px; border-radius:50%; background:var(--gold); display:block}
-.hero{font-size:clamp(2.1rem,10vw,3rem); line-height:1.2; font-weight:700; margin:20px 0 16px; letter-spacing:-.01em}
-.lead{color:var(--muted); font-size:1.08rem}
-.cta{display:flex; flex-direction:column; gap:10px; margin:28px 0 12px}
-.fine{font-size:.85rem; color:var(--muted)}
-
-.card{background:var(--surface); border:1px solid var(--line); border-radius:20px; padding:20px; min-width:0}
-.eyebrow{display:flex; justify-content:space-between; gap:12px; font-size:.82rem; color:var(--muted); margin-bottom:10px}
-.example{margin-top:36px}
-.example h3{font-size:1.15rem; line-height:1.6; margin-bottom:14px}
-.tags{display:flex; flex-wrap:wrap; gap:8px}
-.tag{border-radius:999px; padding:0 12px; font-size:.82rem; background:var(--soft); color:var(--green); font-weight:500}
-
-.how{margin-top:40px}
-.how h2{font-size:1.4rem; margin-bottom:8px}
-.how ol{list-style:none; margin:16px 0 0; padding:0; display:flex; flex-direction:column; gap:18px}
-.how li{display:flex; gap:14px}
-.num{width:34px; height:34px; border-radius:50%; background:var(--green); color:var(--green-ink); display:grid; place-items:center; font-weight:700; flex:none}
-.how b{display:block}
-.how span{color:var(--muted); font-size:.95rem}
-
-.qhead{display:flex; justify-content:space-between; align-items:center; margin-bottom:12px; font-size:.9rem; color:var(--muted)}
-.segs{display:flex; gap:6px; margin-bottom:24px}
-.segs span{flex:1; height:8px; border-radius:99px; background:var(--line)}
-.segs .d{background:var(--green)}
-.segs .c{background:var(--gold)}
-h2.q{font-size:1.6rem; line-height:1.35; margin-bottom:6px}
-.opts{display:flex; flex-direction:column; gap:10px; margin:22px 0}
-.opt{display:block; width:100%; text-align:start; background:var(--surface); border:1.5px solid var(--line); border-radius:16px; padding:14px 16px; font:inherit; color:inherit; cursor:pointer}
-.opt b{display:block}
-.opt span{display:block; color:var(--muted); font-size:.9rem}
-.opt[aria-pressed="true"]{border-color:var(--green); background:var(--soft)}
-
-.stepcard{background:var(--green); color:var(--green-ink); border-radius:24px; padding:24px; display:flex; flex-direction:column; gap:14px}
-.stepcard .meta{display:flex; flex-wrap:wrap; gap:8px; font-size:.85rem}
-.stepcard .meta span{border-radius:999px; padding:0 12px; background:color-mix(in srgb, currentColor 18%, transparent)}
-.stepcard h2{font-size:1.5rem; line-height:1.4}
-.stepcard p{opacity:.92}
-.tip{margin-top:16px; color:var(--muted); font-size:.92rem}
-.soft{margin-top:16px; padding:12px 16px; border-radius:14px; background:var(--soft); color:var(--green); font-size:.92rem}
-.dayline{display:flex; justify-content:space-between; font-size:.9rem; color:var(--muted); margin-bottom:10px}
-
-.feels{display:flex; gap:8px; margin:12px 0}
-.feels .opt{text-align:center; padding:10px 8px}
-textarea{display:block; width:100%; min-height:60px; border-radius:14px; border:1px solid var(--line); background:var(--bg); color:var(--fg); font:inherit; padding:12px; resize:vertical}
-.row{display:flex; gap:10px; margin-top:12px; flex-wrap:wrap; align-items:center}
-.done-card h3{font-size:1.2rem; margin-bottom:4px}
-.saved{margin-top:12px; padding-top:12px; border-top:1px solid var(--line); color:var(--muted); font-size:.95rem; overflow-wrap:anywhere}
-
-.list{margin:8px 0 0; padding:0; list-style:none}
-.item{display:flex; gap:14px; padding:14px 0; border-top:1px solid var(--line); min-width:0}
-.item:first-child{border-top:0}
-.idx{width:32px; height:32px; border-radius:50%; border:1.5px solid var(--line); display:grid; place-items:center; font-size:.9rem; flex:none; color:var(--muted)}
-.item.is-done .idx{background:var(--green); border-color:var(--green); color:var(--green-ink)}
-.item.is-now .idx{border-color:var(--gold); color:var(--fg); font-weight:700}
-.item .body{min-width:0; flex:1}
-.item b{display:block; line-height:1.5}
-.item small{display:block; color:var(--muted); font-size:.88rem; overflow-wrap:anywhere}
-.item.is-later b{color:var(--muted); font-weight:500}
-.plan-h{font-size:1.6rem; line-height:1.35; margin-bottom:4px}
-.summary-n{display:flex; gap:12px; margin:20px 0}
-.summary-n div{flex:1; background:var(--soft); border-radius:16px; padding:14px; text-align:center}
-.summary-n b{display:block; font-size:1.6rem; color:var(--green); line-height:1.3}
-.summary-n span{font-size:.85rem; color:var(--muted)}
-.note{margin-top:32px; font-size:.82rem; color:var(--muted)}
-.share{margin-top:24px}
-.share h3{font-size:1.1rem; margin-bottom:2px}
-.linkbox{display:block; width:100%; margin-top:12px; padding:10px 12px; border-radius:12px; border:1px solid var(--line); background:var(--bg); color:var(--fg); font:inherit; font-size:.82rem}
-
-.nav{position:fixed; inset-inline:0; bottom:0; z-index:5; background:var(--surface); border-top:1px solid var(--line);
-  padding:8px max(16px,env(safe-area-inset-left,0px)) calc(8px + env(safe-area-inset-bottom,0px)) max(16px,env(safe-area-inset-right,0px)); display:flex; justify-content:center}
-.nav[hidden]{display:none}
-.nav-in{display:flex; gap:8px; width:100%; max-width:520px}
-.tab{flex:1; min-height:48px; border-radius:14px; border:0; background:transparent; color:var(--muted); font:inherit; font-weight:500; cursor:pointer}
-.tab[aria-current="page"]{background:var(--soft); color:var(--green); font-weight:700}
+:root{--bg:#F2F6F5;--surface:#FFFFFF;--ink:#1B2B2A;--muted:#5B6F6D;--line:#DCE6E4;--accent:#1F6F6B;--accent-ink:#FFFFFF;--accent-soft:#DDEEEC;--warm-soft:#F6EBD2;--warm-ink:#6B4A0F;--font-display:"Readex Pro","IBM Plex Sans Arabic",Tahoma,sans-serif;--font-body:"IBM Plex Sans Arabic",Tahoma,"Segoe UI",sans-serif}
+@media(prefers-color-scheme:dark){:root:not([data-theme="light"]){--bg:#101918;--surface:#172423;--ink:#E6F0EF;--muted:#9BB1AF;--line:#263635;--accent:#5CC2BA;--accent-ink:#0C1F1E;--accent-soft:#1D3533;--warm-soft:#3A3120;--warm-ink:#F0D9A2;color-scheme:dark}}:root[data-theme="dark"]{--bg:#101918;--surface:#172423;--ink:#E6F0EF;--muted:#9BB1AF;--line:#263635;--accent:#5CC2BA;--accent-ink:#0C1F1E;--accent-soft:#1D3533;--warm-soft:#3A3120;--warm-ink:#F0D9A2;color-scheme:dark}
+*{box-sizing:border-box}body{background:var(--bg);color:var(--ink);direction:rtl;font-family:var(--font-body);font-size:16px;line-height:1.85;padding-block:20px 100px;padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px))}.app{max-width:640px;margin:0 auto}.top{display:flex;align-items:center;gap:12px;margin-bottom:28px}.top svg{flex:none}.brand{font-family:var(--font-display);font-weight:600;font-size:1.25rem;line-height:1.3}.sub{color:var(--muted);font-size:.8rem;letter-spacing:.06em;direction:ltr;text-align:right}h1{font-family:var(--font-display);font-weight:600;font-size:1.7rem;line-height:1.4;margin:0 0 6px;text-wrap:balance}h2{font-family:var(--font-display);font-weight:500;font-size:1.1rem;line-height:1.5;margin:0 0 8px}p{margin:0 0 12px}.lead{color:var(--muted);margin-bottom:22px}.small{font-size:.86rem;color:var(--muted)}.view{display:block}.view[hidden]{display:none}.card{background:var(--surface);border:1px solid var(--line);border-radius:14px;padding:18px;margin-top:20px}.card.soft{background:var(--accent-soft);border-color:transparent}.card.warm{background:var(--warm-soft);border-color:transparent;color:var(--warm-ink)}.chips{display:flex;flex-wrap:wrap;gap:8px}.chip{font:inherit;font-size:.95rem;line-height:1.4;padding:9px 14px;border-radius:999px;border:1px solid var(--line);background:var(--surface);color:var(--ink);cursor:pointer}.chip[aria-pressed="true"]{background:var(--accent);border-color:var(--accent);color:var(--accent-ink)}.btn{font:inherit;font-weight:500;padding:11px 20px;border-radius:10px;border:1px solid var(--accent);background:var(--accent);color:var(--accent-ink);cursor:pointer;line-height:1.4}.btn.ghost{background:transparent;color:var(--accent)}.btn[disabled]{opacity:.55;cursor:default}.row{display:flex;flex-wrap:wrap;gap:10px;align-items:center;margin-top:14px}textarea,input[type=text],input[type=date]{width:100%;font:inherit;color:var(--ink);background:var(--surface);border:1px solid var(--line);border-radius:10px;padding:10px 12px;line-height:1.7}textarea{min-height:150px;resize:vertical}label.l{display:block;font-weight:500;margin:14px 0 6px}:focus-visible{outline:2px solid var(--accent);outline-offset:2px}.list{border-top:1px solid var(--line);margin-top:8px}details{border-bottom:1px solid var(--line);padding:14px 0}summary{cursor:pointer;list-style:none;display:flex;gap:10px;align-items:baseline;justify-content:space-between}summary::-webkit-details-marker{display:none}.stitle{font-weight:500}.tag{font-size:.78rem;color:var(--muted);white-space:nowrap}.tag.ok{color:var(--accent)}details .body{padding-top:10px}details .body ul{margin:0 0 12px;padding-inline-start:20px}.stats{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin-top:20px}.stat{border:1px solid var(--line);background:var(--surface);border-radius:12px;padding:12px;text-align:center}.stat b{display:block;font-family:var(--font-display);font-size:1.5rem;font-weight:600;line-height:1.3;font-variant-numeric:tabular-nums}.stat span{font-size:.8rem;color:var(--muted)}.week{display:flex;gap:6px;justify-content:space-between;margin-top:16px}.day{flex:1;text-align:center;font-size:.75rem;color:var(--muted)}.dot{width:30px;height:30px;border-radius:50%;margin:0 auto 4px;border:1.5px solid var(--line);display:flex;align-items:center;justify-content:center}.dot.on{background:var(--accent);border-color:var(--accent);color:var(--accent-ink)}.dot.now{border-color:var(--accent)}.big{font-size:1.15rem;line-height:1.8;margin-bottom:4px}.story{padding:18px 0;border-bottom:1px solid var(--line)}.story:first-of-type{padding-top:6px}.lesson-line{margin-top:10px;padding-inline-start:12px;border-inline-start:3px solid var(--accent)}.line-item{padding:12px 0;border-bottom:1px solid var(--line)}.line-item .t{margin-bottom:8px}.hint{font-size:.86rem;color:var(--muted);margin-top:8px}.steps{list-style:none;margin:10px 0 0;padding:0}.steps li{display:flex;gap:10px;align-items:flex-start;padding:8px 0}.steps input[type=checkbox]{width:20px;height:20px;margin-top:6px;accent-color:var(--accent);flex:none}.steps .d{display:block;font-size:.8rem;color:var(--muted)}.stepin{margin-bottom:12px}.stepin .d{font-size:.8rem;color:var(--muted);margin-bottom:4px}.err{color:var(--warm-ink);font-size:.9rem;margin-top:8px}
+nav.bar{position:fixed;left:0;right:0;bottom:0;z-index:20;background:var(--surface);border-top:1px solid var(--line);padding-top:6px;padding-bottom:calc(6px + env(safe-area-inset-bottom,0px));padding-left:max(8px,env(safe-area-inset-left,0px));padding-right:max(8px,env(safe-area-inset-right,0px))}nav.bar .in{display:flex;max-width:640px;margin:0 auto}nav.bar a{flex:1;min-width:0;display:flex;flex-direction:column;align-items:center;gap:2px;padding:6px 2px;color:var(--muted);text-decoration:none;font-size:.72rem;line-height:1.3;border-radius:10px}nav.bar a svg{width:22px;height:22px;stroke:currentColor;fill:none;stroke-width:1.7;stroke-linecap:round;stroke-linejoin:round}nav.bar a[aria-current="page"]{color:var(--accent);font-weight:600}@media(prefers-reduced-motion:no-preference){.chip,.btn{transition:background-color .15s,border-color .15s}}
 </style>
-
-<div id="app" class="wrap"></div>
-<nav id="nav" class="nav" hidden aria-label="التنقل"></nav>
-
+</head>
+<body>
+<div class="app" lang="ar" dir="rtl">
+<header class="top"><svg width="34" height="34" viewBox="0 0 34 34" aria-hidden="true"><circle cx="17" cy="17" r="16" fill="var(--accent-soft)"/><path d="M7 23 C14 23 14 11 21 11 L27 11" fill="none" stroke="var(--accent)" stroke-width="2.4" stroke-linecap="round"/><circle cx="27" cy="11" r="2.4" fill="var(--accent)"/></svg><div><div class="brand">نقطة تحول</div><div class="sub">Noktat Tahawul</div></div></header>
+<main>
+<section id="v-start" class="view"><h1>ابدأ من هنا</h1><p class="lead">لا تحتاج أن تعرف الطريق كله. اختر ما يشغلك الآن، وسنقترح عليك أول خطوة صغيرة.</p><div class="chips" id="topics"></div><div id="startResult"></div></section>
+<section id="v-learn" class="view" hidden><h1>تعلّم كل يوم</h1><p class="lead">دروس قصيرة، كل درس في دقيقتين أو ثلاث.</p><div class="list" id="lessons"></div></section>
+<section id="v-daily" class="view" hidden><h1>خطوتك اليومية</h1><p class="lead">مهمة صغيرة واحدة كل يوم. المهم أن تتحرك.</p><div id="dailyBody"></div></section>
+<section id="v-stories" class="view" hidden><h1>قصص وتجارب</h1><p class="lead">أشخاص بدأوا من ظروف صعبة، وما يمكن أن نتعلمه منهم.</p><div class="card warm"><p style="margin:0">القصص التالية نماذج كتبناها لتجربة التطبيق، وليست لأشخاص حقيقيين. القصص الحقيقية ستُضاف لاحقًا بموافقة أصحابها.</p></div><div id="storyList"></div></section>
+<section id="v-guide" class="view" hidden><h1>مساعد نقطة تحول</h1><p class="lead">أداة تساعدك على ترتيب أفكارك وتقسيم هدفك إلى خطوات. هي ليست بديلًا عن أخصائي نفسي أو مهني.</p><div id="guideBody"></div></section>
+</main></div>
+<nav class="bar" aria-label="التنقل الرئيسي" dir="rtl"><div class="in"><a href="#start" data-v="start"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M15.5 8.5l-2 5-5 2 2-5z"/></svg>ابدأ</a><a href="#learn" data-v="learn"><svg viewBox="0 0 24 24"><path d="M4 5.5A2.5 2.5 0 0 1 6.5 3H20v16H6.5A2.5 2.5 0 0 0 4 21.5z"/><path d="M4 5.5v16"/></svg>تعلّم</a><a href="#daily" data-v="daily"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M8 12.5l3 3 5-6"/></svg>خطوتي</a><a href="#stories" data-v="stories"><svg viewBox="0 0 24 24"><path d="M4 5h16v11H9l-5 4z"/></svg>قصص</a><a href="#guide" data-v="guide"><svg viewBox="0 0 24 24"><path d="M12 3l1.8 5.2L19 10l-5.2 1.8L12 17l-1.8-5.2L5 10l5.2-1.8z"/></svg>المساعد</a></div></nav>
 <script>
 (function(){
-document.documentElement.lang = 'ar';
-document.documentElement.dir = 'rtl';
-
-/* ---------- المحتوى ---------- */
-var AREAS = {
-  health: { name:'الصحة والطاقة', desc:'نوم، حركة، أكل من غير أنظمة قاسية.', steps:[
-    {t:'سجّل يومك زي ما هو', d:'اكتب نومك وأكلك وحركتك النهاردة لمدة {m}. من غير أحكام، تسجيل بس.', m:5},
-    {t:'اختار حاجة واحدة تعدلها', d:'نوم أو حركة أو أكل: اختار واحدة بس للأسبوع ده، واكتبها في سطر.', m:5},
-    {t:'ثبّت معاد نوم', d:'حدد معاد نوم قريب من معادك الحالي، وحط تنبيه قبله بنص ساعة.', m:5},
-    {t:'امشي {m}', d:'في أي وقت النهاردة، حتى لو جوه البيت أو في الشغل.', m:10},
-    {t:'بدّل مشروب واحد بمياه', d:'أول مشروب سكري تفكر فيه النهاردة، خليه كوباية مياه.', m:3},
-    {t:'جهّز أكلة بكرة', d:'حضّر حاجة صحية وسهلة دلوقتي عشان ماتقررش وانت جعان.', m:10},
-    {t:'راجع أسبوعك', d:'إيه اللي نفع وإيه اللي صعب؟ اختار عادة واحدة تكمل بيها.', m:7}
-  ]},
-  work: { name:'الشغل والمهنة', desc:'تحديد اتجاه، مهارة جديدة، أو خطوة في مسارك.', steps:[
-    {t:'صوّر شغلك الحالي', d:'اكتب في ٣ سطور: بتعمل إيه، إيه اللي بتحبه فيه، وإيه اللي مضايقك.', m:7},
-    {t:'حدد سؤالك', d:'اكتب سؤال واحد عايز تعرف إجابته. مثلًا: أكمل مكاني ولا أغيّر؟', m:5},
-    {t:'اعرف مهاراتك', d:'اكتب ٣ مهارات عندك، ومهارة واحدة ناقصاك للمكان اللي عايز توصله.', m:10},
-    {t:'دوّر على نماذج', d:'افتح ٣ إعلانات شغل أو ملفات ناس في المجال اللي عايزه، وسجّل المهارات اللي بتتكرر.', m:15},
-    {t:'اسأل حد سبقك', d:'ابعت رسالة قصيرة لحد شغال في المجال ده، واسأله سؤال واحد محدد.', m:10},
-    {t:'اتعلم أول جزء', d:'خصص {m} للمهارة الناقصة: أول درس أو أول مقال بس.', m:20},
-    {t:'راجع وخطط للشهر', d:'اكتب خطوتك الجاية للشهر ده، وخطوة واحدة تبدأ بيها.', m:10}
-  ]},
-  relationships: { name:'العلاقات', desc:'حدود أوضح، تواصل أصدق، ومساحة لنفسك.', steps:[
-    {t:'اختار علاقة', d:'اكتب اسم شخص علاقتك بيه مهمة، وإيه اللي ناقص أو مضايقك فيها.', m:5},
-    {t:'حدد اللي محتاجه', d:'اكتب في سطر واحد: إيه اللي محتاج تقوله أو تسمعه من الطرف التاني؟', m:5},
-    {t:'صيغ جملة صريحة', d:'اكتب: أنا بحس ... لما ... وأنا محتاج ... من غير لوم.', m:7},
-    {t:'ابعت رسالة دفا', d:'رسالة قصيرة لشخص بتحبه من غير سبب ولا طلب.', m:5},
-    {t:'حدد حد واحد', d:'اختار حد صغير ومعقول، وقوله بهدوء أو اكتبه لنفسك لو لسه.', m:7},
-    {t:'وقت لنفسك', d:'خصص {m} لوحدك، بعيد عن الموبايل لو تقدر.', m:20},
-    {t:'راجع علاقتك', d:'إيه اللي اتغير؟ وإيه اللي لسه محتاج كلام؟ اكتب خطوتك الجاية.', m:7}
-  ]},
-  money: { name:'المال', desc:'أول نظرة حقيقية على فلوسك، وخطة تبدأ صغيرة.', steps:[
-    {t:'شوف رقمك الحقيقي', d:'اعرف كام معاك دلوقتي في كل الحسابات والكاش، واكتب الرقم بس.', m:5},
-    {t:'اكتب مصاريفك الثابتة', d:'إيجار، فواتير، أقساط، اشتراكات. حاجة تحت التانية.', m:10},
-    {t:'تتبع آخر ٧ أيام', d:'افتح كشف الحساب أو الإيصالات وسجّل اللي صرفته الأسبوع اللي فات.', m:15},
-    {t:'اختار مصروف تقلله', d:'حاجة واحدة بس، حتى لو الفرق صغير.', m:5},
-    {t:'احجز مبلغ صغير', d:'اختار مبلغ تقدر عليه من غير ما يأثر على يومك، وافصله على جنب.', m:5},
-    {t:'اكتب هدف مالي', d:'هدف واحد، بمبلغ وتاريخ.', m:10},
-    {t:'راجع واختار عادة', d:'اختار عادة مالية واحدة تكمل بيها الشهر ده.', m:7}
-  ]},
-  calm: { name:'الهدوء النفسي', desc:'تقليل التشتت، وتفريغ اللي شايله جواك.', steps:[
-    {t:'فرّغ دماغك', d:'اكتب كل اللي شاغلك لمدة {m} من غير ترتيب ولا تصحيح.', m:5},
-    {t:'اختار ٣ بس', d:'من القايمة، علّم أهم ٣ حاجات. الباقي يستنى لبكرة.', m:5},
-    {t:'قلل المشتتات', d:'اقفل إشعارات تطبيقين بيسحبوا انتباهك.', m:3},
-    {t:'تنفس ببطء', d:'اتنفس لمدة {m}: شهيق أربع ثواني وزفير ست ثواني.', m:3},
-    {t:'ابعد عن الشاشة', d:'قف عند الشباك أو في الشارع {m} من غير موبايل.', m:10},
-    {t:'حدد ساعة بلا شاشات', d:'اختار ساعة في يومك تبقى من غير شاشات، واكتب معادها.', m:5},
-    {t:'راجع اللي هداك', d:'إيه الخطوة اللي حسيت بعدها براحة؟ كمّل بيها.', m:7}
-  ]}
-};
-var BLOCKERS = [
-  {id:'start', l:'مش عارف أبدأ منين', tip:'أول خطوة صغيرة عن قصد. ماتفكرش في اللي بعدها.'},
-  {id:'time', l:'مفيش عندي وقت', tip:'كل خطوة مظبوطة على وقتك وعمرها ما هتزيد عنه.'},
-  {id:'quit', l:'بتحمس وبعدين بقف', tip:'لو فاتك يوم، كمّل من نفس الخطوة. مفيش بداية من الصفر.'},
-  {id:'fear', l:'خايف أغلط', tip:'كل خطوة هنا تجربة صغيرة، وتقدر ترجع عنها.'},
-  {id:'focus', l:'مشتت', tip:'قدامك خطوة واحدة بس في كل مرة. الباقي يستنى.'}
-];
-var TIMES = [5,10,20,30];
-var FEELS = ['خفيف','عادي','تقيل'];
-
-/* ---------- أدوات ---------- */
-function N(n){ return Number(n).toLocaleString('ar-EG'); }
-function label(m){ return m <= 10 ? N(m) + ' دقايق' : N(m) + ' دقيقة'; }
-function esc(s){ return String(s).replace(/[&<>"']/g,function(c){ return {'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]; }); }
-function pad(n){ return String(n).padStart(2,'0'); }
-function dayStr(d){ d = d || new Date(); return d.getFullYear() + '-' + pad(d.getMonth()+1) + '-' + pad(d.getDate()); }
-function yesterdayStr(){ var d = new Date(); d.setDate(d.getDate()-1); return dayStr(d); }
-function stepOf(i){
-  var s = AREAS[state.area].steps[i];
-  var m = Math.max(3, Math.min(s.m, state.mins));
-  var lb = label(m);
-  return { t: s.t.replace('{m}', lb), d: s.d.replace('{m}', lb), m: m, lb: lb };
-}
-function streak(){
-  var days = {}; (state.days || []).forEach(function(x){ days[x] = 1; });
-  var d = new Date(); if(!days[dayStr(d)]) d.setDate(d.getDate()-1);
-  var n = 0; while(days[dayStr(d)]){ n++; d.setDate(d.getDate()-1); }
-  return n;
-}
-
-/* ---------- الحفظ (على الجهاز ده بس) ---------- */
-var KEY = 'noktat-tahawul-v1', mem = null;
-function valid(s){ return s && AREAS[s.area] && Array.isArray(s.steps) && s.steps.length === 7 && typeof s.mins === 'number'; }
-function load(){
-  try { var r = localStorage.getItem(KEY); var s = r ? JSON.parse(r) : null; return valid(s) ? s : null; }
-  catch(e){ return valid(mem) ? mem : null; }
-}
-function save(){ try { localStorage.setItem(KEY, JSON.stringify(state)); } catch(e){ mem = state; } }
-function clearSaved(){ try { localStorage.removeItem(KEY); } catch(e){} mem = null; }
-
-var state = load();
-var ui = { screen: state ? 'today' : 'welcome', q: 0, draft: {}, fresh: false, confirm: false, feel: null, noteDraft: '', prevDays: [] };
-
-var QUIZ = [
-  { key:'area', t:'عايز تغيّر إيه؟', s:'ابدأ بمجال واحد بس. مش لازم تغيّر حياتك كلها مرة واحدة.',
-    opts: Object.keys(AREAS).map(function(id){ return { id:id, l:AREAS[id].name, d:AREAS[id].desc }; }) },
-  { key:'mins', t:'معاك كام دقيقة في اليوم؟', s:'هنظبط كل خطوة على وقتك.',
-    opts: TIMES.map(function(m){ return { id:m, l:label(m), d:'' }; }) },
-  { key:'blocker', t:'إيه أكتر حاجة بتوقفك؟', s:'اختار الأقرب ليك.',
-    opts: BLOCKERS.map(function(b){ return { id:b.id, l:b.l, d:'' }; }) }
-];
-
-/* ---------- الشاشات ---------- */
-function header(){
-  var s = state ? streak() : 0;
-  return '<div class="top"><div class="brand"><div class="mark"><i></i></div><div><b>نقطة تحول</b><small>NOKTAT TAHAWUL</small></div></div>' +
-    (s > 0 ? '<span class="chip">' + N(s) + (s === 1 ? ' يوم' : s <= 10 ? ' أيام متتالية' : ' يوم متتالي') + '</span>' : '') + '</div>';
-}
-
-function welcome(){
-  return '<div class="appbar">' +
-    '<button class="mini-btn" data-act="lang" aria-label="تغيير اللغة">EN</button>' +
-    '<div class="account-actions"><button class="mini-btn" data-act="login">دخول</button><button class="mini-btn primary-mini" data-act="signup">إنشاء حساب</button></div>' +
-    '</div>' +
-    '<div class="welcome-brand"><div class="mark big-mark"><i></i></div><div><b>نقطة تحول</b><small>NOKTAT TAHAWUL</small></div></div>' +
-    '<span class="pill"><i></i>مش تطبيق تحفيز. تطبيق خطوات.</span>' +
-    '<h1 class="hero">كل تغيير كبير يبدأ بنقطة واحدة</h1>' +
-    '<p class="lead">مش محتاج نصيحة جديدة... محتاج تعرف تبدأ منين. المساعد يفهم وضعك، ويحوّل هدفك لأول خطوة تقدر تنفذها.</p>' +
-    '<div class="cta"><button class="btn block" data-act="start">ابدأ نقطة التحول ←</button>' +
-    '<p class="fine">مجاني · مساعد شخصي · أول خطوة واضحة</p></div>' +
-    '<div class="assistant-card">' +
-      '<div class="assistant-head"><div class="assistant-avatar">✦</div><div><b>مساعد نقطة تحول</b><span>هساعدك تحدد البداية، مش هديك كلام عام.</span></div></div>' +
-      '<h3>المساعد يقدر يساعدك في إيه؟</h3>' +
-      '<div class="assistant-grid">' +
-        '<button class="assistant-opt" data-act="assistant" data-val="work"><b>💼 الشغل والمهنة</b><span>وظيفة، تغيير مسار، مهارة</span></button>' +
-        '<button class="assistant-opt" data-act="assistant" data-val="money"><b>💰 المال والدخل</b><span>ترتيب وضعك وأول خطوة</span></button>' +
-        '<button class="assistant-opt" data-act="assistant" data-val="learn"><b>📚 التعلم والتطوير</b><span>اختيار مهارة والبدء فيها</span></button>' +
-        '<button class="assistant-opt" data-act="assistant" data-val="calm"><b>🧠 الهدوء والتشتت</b><span>تقليل التشتت وترتيب اليوم</span></button>' +
-        '<button class="assistant-opt" data-act="assistant" data-val="relationships"><b>❤️ العلاقات</b><span>تواصل وحدود أوضح</span></button>' +
-        '<button class="assistant-opt" data-act="assistant" data-val="goal"><b>🎯 هدف مش عارف تبدأه</b><span>نحوّل الهدف لأول خطوة</span></button>' +
-      '</div>' +
-      '<button class="assistant-free" data-act="assistant" data-val="other">❓ مش عارف أبدأ منين</button>' +
-    '</div>' +
-    '<div class="card example"><div class="eyebrow"><span>مثال لخطوة النهاردة</span><span>١ من ٧ خطوات</span></div>' +
-    '<h3>اكتب ٣ حاجات مضايقاك في يومك، وجنب كل واحدة أول حل ممكن</h3>' +
-    '<div class="tags"><span class="tag">٥ دقايق</span><span class="tag">الهدوء النفسي</span></div></div>' +
-    '<div class="how"><h2>من حيرة كبيرة لخطوة واحدة واضحة</h2><ol>' +
-    '<li><span class="num">١</span><div><b>قولنا إنت فين دلوقتي</b><span>٣ أسئلة قصيرة عن المجال ووقتك وإيه اللي بيوقفك.</span></div></li>' +
-    '<li><span class="num">٢</span><div><b>المساعد يحدد معاك البداية</b><span>مش نصيحة عامة؛ خطوة مناسبة لوضعك ووقتك.</span></div></li>' +
-    '<li><span class="num">٣</span><div><b>تنفذ وتتابع تقدمك</b><span>تعلّم إن الخطوة تمت، وتكمل من النقطة اللي وصلت لها.</span></div></li>' +
-    '</ol></div>';
-}
-
-function quiz(){
-  var q = QUIZ[ui.q], cur = ui.draft[q.key];
-  var segs = '';
-  for(var i = 0; i < 3; i++) segs += '<span class="' + (i < ui.q ? 'd' : i === ui.q ? 'c' : '') + '"></span>';
-  var opts = q.opts.map(function(o){
-    return '<button class="opt" data-act="pick" data-val="' + esc(o.id) + '" aria-pressed="' + (String(cur) === String(o.id)) + '"><b>' + esc(o.l) + '</b>' + (o.d ? '<span>' + esc(o.d) + '</span>' : '') + '</button>';
-  }).join('');
-  return '<div class="qhead"><button class="link" data-act="qback">رجوع</button><span>سؤال ' + N(ui.q+1) + ' من ' + N(3) + '</span></div>' +
-    '<div class="segs">' + segs + '</div>' +
-    '<h2 class="q">' + q.t + '</h2><p class="lead">' + q.s + '</p>' +
-    '<div class="opts">' + opts + '</div>' +
-    '<button class="btn block" data-act="qnext"' + (cur === undefined ? ' disabled' : '') + '>' + (ui.q < 2 ? 'التالي ←' : 'اعمل خطتي') + '</button>';
-}
-
-function segsHTML(done, now){
-  var h = '';
-  for(var i = 0; i < 7; i++) h += '<span class="' + (i < done ? 'd' : i === now ? 'c' : '') + '"></span>';
-  return '<div class="segs">' + h + '</div>';
-}
-
-function planView(){
-  var done = state.steps.filter(function(s){ return s.done; }).length;
-  var blocker = BLOCKERS.filter(function(b){ return b.id === state.blocker; })[0];
-  var items = state.steps.map(function(st, i){
-    var s = stepOf(i);
-    var cls = st.done ? 'is-done' : i === done ? 'is-now' : 'is-later';
-    var show = st.done || i === done;
-    var extra = '';
-    if(st.done && st.feel) extra += '<small>حسيت: ' + esc(st.feel) + '</small>';
-    return '<li class="item ' + cls + '"><span class="idx">' + (st.done ? '✓' : N(i+1)) + '</span><div class="body"><b>' + esc(s.t) + '</b>' +
-      (show ? '<small>' + esc(s.d) + '</small>' : '') + '<small>' + esc(s.lb) + '</small>' + extra + '</div></li>';
-  }).join('');
-  var foot;
-  if(ui.fresh){
-    foot = '<div class="cta"><button class="btn block" data-act="begin">ابدأ أول خطوة ←</button></div>';
-  } else if(ui.confirm){
-    foot = '<div class="soft">هتبدأ خطة جديدة، والخطة الحالية هتتمسح. متأكد؟</div><div class="row"><button class="btn ghost" data-act="resetno">لا، كمّل</button><button class="btn" data-act="resetyes">آه، ابدأ خطة جديدة</button></div>';
-  } else {
-    foot = '<div class="row"><button class="link" data-act="reset">ابدأ خطة جديدة</button></div>';
-  }
-  return (ui.fresh ? '<span class="chip">خطتك جاهزة</span>' : '') +
-    '<h2 class="plan-h" style="margin-top:12px">' + esc(AREAS[state.area].name) + '</h2>' +
-    '<p class="lead">٧ خطوات · لحد ' + label(state.mins) + ' في اليوم</p>' +
-    (blocker ? '<div class="soft">' + esc(blocker.l) + '؟ ' + esc(blocker.tip) + '</div>' : '') +
-    '<div class="card" style="margin-top:16px"><ul class="list">' + items + '</ul></div>' + foot + (ui.fresh ? '' : shareCard());
-}
-
-function reflection(idx){
-  var feels = FEELS.map(function(f){ return '<button class="opt" data-act="feel" data-val="' + f + '" aria-pressed="' + (ui.feel === f) + '">' + f + '</button>'; }).join('');
-  return '<div class="card done-card" style="margin-top:16px"><h3>حسيت بإيه بعد الخطوة؟</h3><p class="fine">اختياري، بس بيساعدك تشوف تقدمك بعدين.</p>' +
-    '<div class="feels">' + feels + '</div>' +
-    '<textarea id="note" maxlength="500" placeholder="ملاحظة قصيرة لنفسك (اختياري)">' + esc(ui.noteDraft) + '</textarea>' +
-    '<div class="row"><button class="btn" data-act="saveref">احفظ</button><button class="link" data-act="skipref">تخطي</button></div></div>';
-}
-
-function todayView(){
-  var done = state.steps.filter(function(s){ return s.done; }).length;
-  var last = done > 0 ? state.steps[done-1] : null;
-  if(done === 7){
-    if(!last.reflected) return '<h2 class="plan-h">خلصت آخر خطوة</h2><p class="lead">قبل الملخص، قولنا حسيت بإيه.</p>' + reflection(6);
-    return summary();
-  }
-  var lockedToday = last && last.doneDay === dayStr() && state.unlockIdx !== done;
-  if(lockedToday){
-    var s = stepOf(done-1);
-    var saved = '';
-    if(last.reflected){
-      saved = '<div class="saved">' + (last.feel ? 'حسيت: ' + esc(last.feel) : 'من غير تقييم') + (last.note ? '<br>' + esc(last.note) : '') + '</div>';
-    }
-    return '<div class="dayline"><span>خلصت ' + N(done) + ' من ٧</span></div>' + segsHTML(done, -1) +
-      '<div class="card done-card"><div class="eyebrow"><span>خطوة النهاردة تمت</span></div><h3>' + esc(s.t) + '</h3><p class="fine">الخطوة الجاية (' + N(done+1) + ') بتفتح بكرة. ارتاح النهاردة.</p>' + saved + '</div>' +
-      (last.reflected ? '' : reflection(done-1)) +
-      '<div class="row" style="margin-top:16px"><button class="link" data-act="unlock">عايز أكمل النهاردة، افتح الخطوة الجاية</button></div>';
-  }
-  var s2 = stepOf(done);
-  var blocker = BLOCKERS.filter(function(b){ return b.id === state.blocker; })[0];
-  var missed = last && last.doneDay < yesterdayStr();
-  return '<div class="dayline"><span>الخطوة ' + N(done+1) + ' من ' + N(7) + '</span><span>' + esc(AREAS[state.area].name) + '</span></div>' + segsHTML(done, done) +
-    '<div class="stepcard"><div class="meta"><span>' + esc(s2.lb) + '</span></div><h2>' + esc(s2.t) + '</h2><p>' + esc(s2.d) + '</p>' +
-    '<button class="btn invert block" data-act="done">نفذت الخطوة</button></div>' +
-    (missed ? '<div class="soft">فاتك كام يوم؟ عادي. كمّل من نفس الخطوة.</div>' : '') +
-    (blocker ? '<p class="tip">' + esc(blocker.tip) + '</p>' : '');
-}
-
-function summary(){
-  var items = state.steps.map(function(st, i){
-    var s = stepOf(i);
-    return '<li class="item is-done"><span class="idx">✓</span><div class="body"><b>' + esc(s.t) + '</b>' +
-      (st.feel ? '<small>حسيت: ' + esc(st.feel) + '</small>' : '') + (st.note ? '<small>' + esc(st.note) + '</small>' : '') + '</div></li>';
-  }).join('');
-  var uniq = {}; state.steps.forEach(function(s){ if(s.doneDay) uniq[s.doneDay] = 1; });
-  return '<span class="chip">الخطة اكتملت</span><h2 class="plan-h" style="margin-top:12px">خلصت الـ٧ خطوات</h2>' +
-    '<p class="lead">بدأت من نقطة واحدة في ' + esc(AREAS[state.area].name) + '، وبقى عندك ٧ خطوات اتنفذت فعلًا.</p>' +
-    '<div class="summary-n"><div><b>' + N(7) + '</b><span>خطوات</span></div><div><b>' + N(Object.keys(uniq).length) + '</b><span>أيام نشاط</span></div></div>' +
-    '<div class="card"><ul class="list">' + items + '</ul></div>' +
-    shareCard() +
-    '<div class="cta"><button class="btn block" data-act="newplan">ابدأ نقطة تحول جديدة ←</button></div>';
-}
-
-var SHARE_URL = 'https://claude.ai/artifact/CDvQdQyYfnt7KuFQkdRciw';
-var SHARE_MSG = 'جرّبت تطبيق نقطة تحول: بيديك خطة ٧ خطوات صغيرة وتنفذ خطوة كل يوم.\n';
-function shareCard(){
-  return '<div class="card share"><h3>شارك نقطة تحول مع حد بتحبه</h3><p class="fine">كل واحد بيبدأ خطته الخاصة، وتقدمه بيتحفظ عنده هو.</p>' +
-    '<input id="sharelink" class="linkbox" readonly dir="ltr" value="' + esc(SHARE_URL) + '" aria-label="رابط التطبيق">' +
-    '<div class="row"><button class="btn" data-act="copy">' + (ui.copied ? 'تم النسخ ✓' : 'انسخ رسالة المشاركة') + '</button></div></div>';
-}
-
-var NOTE = '<p class="note">نقطة تحول بتساعدك تبدأ بخطوات عملية بسيطة، وهي مش بديل عن متخصص. لو تعبان نفسيًا فعلًا، كلّم متخصص أو حد قريب منك.</p>';
-
-function render(){
-  var app = document.getElementById('app'), nav = document.getElementById('nav');
-  var inApp = !!state && (ui.screen === 'today' || ui.screen === 'plan');
-  document.body.classList.toggle('has-nav', inApp);
-  var body = '';
-  if(ui.screen === 'welcome') body = welcome();
-  else if(ui.screen === 'quiz') body = quiz();
-  else if(ui.screen === 'plan') body = planView();
-  else body = todayView();
-  app.innerHTML = header() + body + NOTE;
-  nav.hidden = !inApp;
-  nav.innerHTML = inApp ? '<div class="nav-in"><button class="tab" data-act="tab" data-val="today"' + (ui.screen === 'today' ? ' aria-current="page"' : '') + '>اليوم</button>' +
-    '<button class="tab" data-act="tab" data-val="plan"' + (ui.screen === 'plan' ? ' aria-current="page"' : '') + '>خطتي</button></div>' : '';
-}
-function go(screen){ ui.screen = screen; render(); try { window.scrollTo(0,0); } catch(e){} }
-
-function startNewPlan(){
-  ui.prevDays = state ? (state.days || []) : [];
-  state = null; clearSaved();
-  ui.draft = {}; ui.q = 0; ui.confirm = false; ui.fresh = false;
-  go('quiz');
-}
-function readNote(){ var ta = document.getElementById('note'); if(ta) ui.noteDraft = ta.value; }
-function finishReflection(withValues){
-  var done = state.steps.filter(function(s){ return s.done; }).length;
-  var st = state.steps[done-1];
-  if(withValues){ readNote(); st.feel = ui.feel || null; st.note = (ui.noteDraft || '').trim().slice(0,500); }
-  st.reflected = true; ui.feel = null; ui.noteDraft = '';
-  save(); render();
-}
-
-function act(a, val){
-  if(a === 'lang'){
-    alert('اللغة الحالية: العربية\nسنضيف تبديل العربية / English في الخطوة التالية.');
-  }
-  else if(a === 'login'){
-    alert('تسجيل الدخول سيتم ربطه بـ Firebase Authentication.');
-  }
-  else if(a === 'signup'){
-    alert('إنشاء الحساب سيتم ربطه بـ Firebase Authentication.');
-  }
-  else if(a === 'assistant'){
-    if(val === 'work') ui.draft = {area:'work'};
-    else if(val === 'money') ui.draft = {area:'money'};
-    else if(val === 'relationships') ui.draft = {area:'relationships'};
-    else if(val === 'calm') ui.draft = {area:'calm'};
-    else ui.draft = {};
-    ui.q = 0; go('quiz');
-  }
-  else if(a === 'start'){ ui.draft = {}; ui.q = 0; go('quiz'); }
-  else if(a === 'pick'){ var key = QUIZ[ui.q].key; ui.draft[key] = key === 'mins' ? parseInt(val,10) : val; render(); }
-  else if(a === 'qback'){ if(ui.q > 0){ ui.q--; render(); } else go('welcome'); }
-  else if(a === 'qnext'){
-    if(ui.q < 2){ ui.q++; render(); return; }
-    state = { area: ui.draft.area, mins: ui.draft.mins, blocker: ui.draft.blocker, days: ui.prevDays || [], unlockIdx: -1,
-      steps: [{},{},{},{},{},{},{}] };
-    save(); ui.fresh = true; go('plan');
-  }
-  else if(a === 'begin'){ ui.fresh = false; go('today'); }
-  else if(a === 'tab'){ ui.confirm = false; go(val); }
-  else if(a === 'done'){
-    var i = state.steps.filter(function(s){ return s.done; }).length;
-    var d = dayStr();
-    state.steps[i] = { done: true, doneDay: d };
-    state.days = state.days || [];
-    if(state.days.indexOf(d) < 0) state.days.push(d);
-    ui.feel = null; ui.noteDraft = '';
-    save(); render(); try { window.scrollTo(0,0); } catch(e){}
-  }
-  else if(a === 'feel'){ readNote(); ui.feel = (ui.feel === val ? null : val); render(); }
-  else if(a === 'saveref'){ finishReflection(true); }
-  else if(a === 'skipref'){ finishReflection(false); }
-  else if(a === 'unlock'){ state.unlockIdx = state.steps.filter(function(s){ return s.done; }).length; save(); render(); try { window.scrollTo(0,0); } catch(e){} }
-  else if(a === 'reset'){ ui.confirm = true; render(); }
-  else if(a === 'resetno'){ ui.confirm = false; render(); }
-  else if(a === 'copy'){
-    var txt = SHARE_MSG + SHARE_URL;
-    var ok = function(){ ui.copied = true; render(); setTimeout(function(){ ui.copied = false; render(); }, 2500); };
-    var fb = function(){ var i = document.getElementById('sharelink'); if(i){ i.focus(); i.select(); } };
-    try { navigator.clipboard.writeText(txt).then(ok, fb); } catch(e){ fb(); }
-  }
-  else if(a === 'resetyes' || a === 'newplan'){ startNewPlan(); }
-}
-
-document.addEventListener('click', function(e){
-  var b = e.target.closest ? e.target.closest('[data-act]') : null;
-  if(!b || b.disabled) return;
-  act(b.getAttribute('data-act'), b.getAttribute('data-val'));
-});
-
-window.__noktat = { act: act, render: render, getState: function(){ return state; } };
-render();
-})();
+var $=function(s,r){return(r||document).querySelector(s)};var esc=function(s){return String(s).replace(/[&<>"']/g,function(c){return{'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]})};var nf=new Intl.NumberFormat('ar-EG');var n=function(x){return nf.format(x)};var pad=function(x){return String(x).padStart(2,'0')};var key=function(d){return d.getFullYear()+'-'+pad(d.getMonth()+1)+'-'+pad(d.getDate())};var today=function(){return key(new Date())};var fmtDate=function(k){return new Date(k+'T00:00:00').toLocaleDateString('ar-EG',{day:'numeric',month:'long'})};
+var KEY='noktat-tahawul-v1';var DEFAULTS=['اكتب ثلاثة أشياء تشكر عليها اليوم.','امشِ عشر دقائق دون هاتف.','رتّب مساحة صغيرة واحدة: درجًا أو سطح مكتب.','اشرب كوب ماء الآن، ثم اكتب أهم مهمة لليوم.','أرسل رسالة قصيرة إلى شخص تحبه لتطمئن عليه.','تعلّم شيئًا جديدًا لمدة عشرين دقيقة.'];var S={task:DEFAULTS[0],sug:0,done:{},read:{},plan:null};try{var raw=localStorage.getItem(KEY);if(raw){var o=JSON.parse(raw);for(var k in o){S[k]=o[k]}}}catch(e){}function save(){try{localStorage.setItem(KEY,JSON.stringify(S))}catch(e){}}
+var TOPICS=[{id:'anx',label:'قلق ولا أستطيع الهدوء',first:'خصّص خمس دقائق الآن واكتب كل ما يشغلك على ورقة، دون ترتيب ودون حكم على ما تكتبه.',why:'الفكرة حين تبقى في الرأس تبدو أكبر منها حين تراها مكتوبة.'},{id:'work',label:'عملي ومستقبلي',first:'اكتب جملة واحدة: أين أريد أن أكون بعد سنة؟ ثم اختر شيئًا صغيرًا واحدًا يقرّبك منها هذا الأسبوع.',why:'الوجهة الواضحة تجعل الخطوة التالية أسهل في الاختيار.'},{id:'skill',label:'أريد تعلّم مهارة',first:'اختر مهارة واحدة فقط، وخصّص لها عشرين دقيقة اليوم. المهم أن تبدأ، لا أن تكمل.',why:'مهارة واحدة بانتظام تتقدم أسرع من خمس مهارات بحماس مؤقت.'},{id:'habit',label:'أريد بناء عادة',first:'اختر عادة تستغرق أقل من دقيقتين، كصفحة من كتاب، واربطها بشيء تفعله كل يوم مثل شرب القهوة.',why:'العادة الصغيرة المرتبطة بروتين قائم تثبت أسرع.'},{id:'ppl',label:'علاقاتي بالناس',first:'أرسل رسالة قصيرة إلى شخص واحد تحبه، فقط لتسأل عن حاله.',why:'الاتصال الصغير والمنتظم يبني القرب أكثر من لقاء كبير نادر.'},{id:'lost',label:'لا أعرف من أين أبدأ',first:'اكتب ثلاثة أشياء مرّت اليوم وشعرت معها بأي ارتياح، حتى لو كانت صغيرة جدًا.',why:'ملاحظة ما يعمل في يومك نقطة بداية أوضح من البحث عمّا ينقصه.'}];
+var LESSONS=[{id:'l1',cat:'إدارة الوقت',min:2,title:'أهم ثلاث مهام لليوم',body:'<p>في أول اليوم اكتب كل ما في بالك من مهام، ثم اختر ثلاثًا فقط، تلك التي يجعل إنجازُها يومَك ناجحًا.</p><p>ابدأ بالأصعب منها وأنت في أفضل طاقتك. ما تبقى يؤجَّل دون شعور بالذنب.</p><div class="lesson-line">جرّب غدًا: اكتب الثلاث مهام قبل أن تفتح هاتفك.</div>'},{id:'l2',cat:'تطوير الذات',min:2,title:'ابدأ بخطوة صغيرة',body:'<p>الخطوة الكبيرة تخيفنا فنؤجلها. اجعل البداية صغيرة حتى تبدو مضحكة: صفحة واحدة، خمس دقائق، رسالة واحدة.</p><p>بعد أن تبدأ يصبح الاستمرار أسهل بكثير من البدء نفسه.</p><div class="lesson-line">اسأل نفسك: ما أصغر نسخة من هذا الهدف أستطيع فعلها الآن؟</div>'},{id:'l3',cat:'تطوير الذات',min:3,title:'ما تتحكم فيه وما لا تتحكم فيه',body:'<p>قسّم ما يشغلك إلى جزأين: ما تستطيع فعله، وما لا تستطيع التأثير فيه.</p><ul><li>اكتب كل قلق في عمود من العمودين.</li><li>ضع وقتك وجهدك في العمود الأول فقط.</li><li>الثاني يكفيه أن تعترف به ثم تتركه.</li></ul><div class="lesson-line">حتى الجزء الصغير الذي تتحكم فيه أفضل من القلق في مكان لا تصل إليه.</div>'},{id:'l4',cat:'مهارات رقمية',min:3,title:'نظّم ملفاتك في عشر دقائق',body:'<ul><li>أنشئ ثلاثة مجلدات: العمل، الشخصي، الأرشيف.</li><li>ابدأ اسم كل ملف بالتاريخ، فيرتّب الجهاز الملفات لك.</li><li>احذف ما لا تحتاجه الآن، وانقل القديم إلى الأرشيف.</li></ul><p>لا تحاول ترتيب كل شيء مرة واحدة. ابدأ بمجلد التنزيلات.</p>'},{id:'l5',cat:'العمل',min:2,title:'رسالة عمل واضحة',body:'<ul><li>الطلب في السطر الأول.</li><li>السياق في جملتين على الأكثر.</li><li>الموعد المطلوب في النهاية.</li></ul><p>اقرأ رسالتك كأنك المستلم: هل يعرف ماذا يفعل بعد القراءة؟ إن لم يعرف، أعد كتابة السطر الأول.</p>'},{id:'l6',cat:'إدارة الوقت',min:2,title:'الراحة جزء من العمل',body:'<p>اعمل خمسًا وعشرين دقيقة بتركيز كامل، ثم استرح خمس دقائق بعيدًا عن الشاشة.</p><p>بعد أربع جولات خذ راحة أطول، نحو ربع ساعة. التعب المتراكم يبطّئك أكثر مما توفّره بالاستمرار.</p>'}];
+var STORIES=[{t:'من وظيفة ضائعة إلى مهارة جديدة',p:'بعد أن فقد شاب وظيفته لم يعرف من أين يبدأ. قرر أن يتعلم مهارة واحدة فقط لمدة نصف ساعة كل يوم، دون أن ينتظر أن يشعر بالحماس. بعد أربعة أشهر أنجز أول عمل حر مدفوع.',l:'الاستمرار اليومي الصغير أقوى من الحماس المؤقت.'},{t:'عودة إلى الدراسة بعد سنوات',p:'امرأة توقفت عن الدراسة بسبب ظروف أسرتها، ثم رأت أن الوقت قد فات. بدأت بدرس واحد في الأسبوع، ثم زادت تدريجيًا. بعد عامين أنهت الشهادة التي أجّلتها طويلًا.',l:'التأخر لا يلغي الطريق. ابدأ بحجم يناسب وقتك الحالي.'},{t:'الذي كان يؤجل كل شيء',p:'طالب كان يؤجل كل مهمة حتى اللحظة الأخيرة ويشعر بالذنب دائمًا. جرّب قاعدة بسيطة: يعمل عشر دقائق فقط ثم يقرر هل يكمل. في أغلب الأيام كان يكمل.',l:'اجعل البداية سهلة جدًا، فالصعوبة غالبًا في البدء لا في العمل.'}];
+var CATS=['قلق','هدف','قرار','خارج عن إرادتي'];var CAT_HINT={'قلق':'اسأل نفسك: هل أستطيع فعل شيء بشأنه اليوم؟ إن لم يكن، دوّنه وانتقل.','هدف':'جيد. سنحوّله إلى خطوات صغيرة.','قرار':'اكتب الخيارين أو الثلاثة المتاحة، وما يهمك في كل منها.','خارج عن إرادتي':'لا تملك التحكم فيه. ركّز على ردّ فعلك وعلى ما يمكنك فعله.'};var CARE_RE=/انتحر|اقتل نفسي|اوذي نفسي|اذي نفسي|انهي حياتي|عايز اموت|اتمنى اموت|اريد ان اموت|مش عايز اعيش|لا اريد ان اعيش/;function needsCare(t){return CARE_RE.test(String(t).replace(/[أإآ]/g,'ا').replace(/ى/g,'ي'))}
+var VIEWS=['start','learn','daily','stories','guide'];function show(){var h=location.hash.slice(1);if(VIEWS.indexOf(h)<0)h='start';VIEWS.forEach(function(v){$('#v-'+v).hidden=(v!==h)});document.querySelectorAll('nav.bar a').forEach(function(a){if(a.dataset.v===h)a.setAttribute('aria-current','page');else a.removeAttribute('aria-current')});if(h==='daily')renderDaily();if(h==='guide')renderGuide();window.scrollTo(0,0)}window.addEventListener('hashchange',show);function go(v){if(location.hash==='#'+v)show();else location.hash=v}
+var chosenTopic=null;function renderStart(){ $('#topics').innerHTML=TOPICS.map(function(t){return '<button type="button" class="chip" data-act="topic" data-id="'+t.id+'" aria-pressed="'+(chosenTopic===t.id)+'">'+esc(t.label)+'</button>'}).join('');var t=TOPICS.filter(function(x){return x.id===chosenTopic})[0];$('#startResult').innerHTML=t?' <div class="card soft"><h2>أول خطوة مقترحة</h2><p class="big">'+esc(t.first)+'</p><p class="small">'+esc(t.why)+'</p><div class="row"><button type="button" class="btn" data-act="adopt">اجعلها خطوة اليوم</button></div></div>':'<p class="small" style="margin-top:20px">اختر واحدًا من الخيارات أعلاه.</p>'}
+function renderLessons(){ $('#lessons').innerHTML=LESSONS.map(function(l){var r=!!S.read[l.id];return '<details><summary><span class="stitle">'+esc(l.title)+'</span><span class="tag'+(r?' ok':'')+'" id="tag-'+l.id+'">'+(r?'تمت القراءة':esc(l.cat)+' · '+n(l.min)+' د')+'</span></summary><div class="body">'+l.body+'<button type="button" class="btn ghost" data-act="read" data-id="'+l.id+'"'+(r?' disabled':'')+'>'+ (r?'تمت القراءة':'قرأتُ الدرس')+'</button></div></details>'}).join('')}
+function streak(){var d=new Date(),c=0;if(!S.done[key(d)])d.setDate(d.getDate()-1);while(S.done[key(d)]){c++;d.setDate(d.getDate()-1)}return c}
+function renderDaily(){var t=today(),isDone=!!S.done[t],total=Object.keys(S.done).filter(function(k){return S.done[k]}).length,readN=Object.keys(S.read).filter(function(k){return S.read[k]}).length,dots='';for(var i=6;i>=0;i--){var d=new Date();d.setDate(d.getDate()-i);var k=key(d),on=!!S.done[k];dots+='<div class="day"><div class="dot'+(on?' on':'')+(i===0?' now':'')+'">'+(on?'✓':'')+'</div>'+d.toLocaleDateString('ar-EG',{weekday:'short'})+'</div>'}$('#dailyBody').innerHTML='<div class="card'+(isDone?' soft':'')+'"><h2>'+ (isDone?'أنجزت خطوة اليوم':'خطوة اليوم')+'</h2><p class="big">'+esc(S.task)+'</p><div class="row"><button type="button" class="btn'+(isDone?' ghost':'')+'" data-act="done">'+(isDone?'تراجع':'أنجزتها')+'</button><button type="button" class="btn ghost" data-act="suggest">اقتراح آخر</button></div></div><div class="stats"><div class="stat"><b>'+n(streak())+'</b><span>أيام متتالية</span></div><div class="stat"><b>'+n(total)+'</b><span>خطوات منجزة</span></div><div class="stat"><b>'+n(readN)+'</b><span>دروس مقروءة</span></div></div><div class="week" aria-label="آخر سبعة أيام">'+dots+'</div><label class="l" for="taskInput">أو اكتب خطوتك بنفسك</label><input type="text" id="taskInput" maxlength="140" placeholder="مثال: اقرأ عشر صفحات"><div class="row"><button type="button" class="btn ghost" data-act="savetask">حفظ الخطوة</button></div>'}
+function renderStories(){ $('#storyList').innerHTML=STORIES.map(function(s){return '<article class="story"><h2>'+esc(s.t)+'</h2><p>'+esc(s.p)+'</p><div class="lesson-line"><b>الدرس العملي:</b> '+esc(s.l)+'</div></article>'}).join('')}
+function freshG(){return{step:1,text:'',lines:[],cats:[],goal:null,target:'',steps:[],err:''}}var G=freshG();function candidates(){var idx=G.lines.map(function(_,i){return i}),pref=idx.filter(function(i){return G.cats[i]==='هدف'||G.cats[i]==='قرار'});if(pref.length)return pref;var rest=idx.filter(function(i){return G.cats[i]!=='خارج عن إرادتي'});return rest.length?rest:idx}function buildSteps(goal,target){var start=new Date();start.setHours(0,0,0,0);var end=target?new Date(target+'T00:00:00'):null;if(!end||isNaN(end)||end<=start){end=new Date(start);end.setDate(end.getDate()+7)}var span=Math.round((end-start)/86400000);var texts=['حدّد المطلوب في جملة واحدة: ماذا يعني «'+goal+'» بالضبط؟','اكتب ما تحتاجه: وقتًا أو معلومة أو شخصًا يساعدك.','ابدأ بأصغر خطوة ممكنة، واجعلها قابلة للإنجاز في نصف ساعة.','راجع ما أنجزته وعدّل الخطة إن لزم.'];return[.1,.4,.7,1].map(function(f,i){var d=new Date(start);d.setDate(d.getDate()+Math.round(span*f));return{text:texts[i],date:key(d)}})}
+function planCard(){var p=S.plan,doneN=p.steps.filter(function(s){return s.done}).length;return '<div class="card soft"><h2>خطتك الحالية</h2><p class="big">'+esc(p.goal)+'</p><p class="small" id="planCount">أنجزت '+n(doneN)+' من '+n(p.steps.length)+'</p><ul class="steps">'+p.steps.map(function(s,i){return '<li><input type="checkbox" id="plan-'+i+'" data-plan="'+i+'"'+(s.done?' checked':'')+'><label for="plan-'+i+'">'+esc(s.text)+'<span class="d">'+fmtDate(s.date)+'</span></label></li>'}).join('')+'</ul><div class="row"><button type="button" class="btn ghost" data-act="planfirst">اجعل أول خطوة متبقية خطوة اليوم</button></div></div>'}
+function wizard(){var h='<div class="card">';if(G.step===1){h+='<h2>ما الذي يشغلك الآن؟</h2><p class="small">اكتب كل فكرة في سطر مستقل. لا حاجة للترتيب.</p><textarea id="g-text" placeholder="مثال:\nأريد تغيير عملي\nأخاف من الامتحان القادم\nأتردد بين دورتين">'+esc(G.text)+'</textarea><div id="care" class="card warm" hidden><p style="margin:0">ما تكتبه يبدو ثقيلًا، وأنت تستحق أن تكون بخير. إذا كنت تفكر في إيذاء نفسك، فلا تبقَ وحدك الآن: تحدث إلى شخص تثق به، أو اتصل بالإسعاف (١٢٣ في مصر)، أو اذهب إلى أقرب طوارئ.</p></div><div class="err" id="g-err">'+esc(G.err)+'</div><div class="row"><button type="button" class="btn" data-act="g1">التالي</button></div>'}else if(G.step===2){h+='<h2>صنّف كل فكرة</h2><p class="small">اختر ما يصفها أقرب.</p>';G.lines.forEach(function(line,i){h+='<div class="line-item"><div class="t">'+esc(line)+'</div><div class="chips">'+CATS.map(function(c){return '<button type="button" class="chip" data-act="cat" data-i="'+i+'" data-c="'+c+'" aria-pressed="'+(G.cats[i]===c)+'">'+c+'</button>'}).join('')+'</div>'+ (G.cats[i]?'<div class="hint">'+CAT_HINT[G.cats[i]]+'</div>':'')+'</div>'});h+='<div class="row"><button type="button" class="btn" data-act="g2">التالي</button><button type="button" class="btn ghost" data-act="gback">رجوع</button></div>'}else if(G.step===3){var c=candidates();h+='<h2>��لى أي شيء تريد العمل أولًا؟</h2><div class="chips" style="margin-top:10px">'+c.map(function(i){return '<button type="button" class="chip" data-act="goal" data-i="'+i+'" aria-pressed="'+(G.goal===i)+'">'+esc(G.lines[i])+'</button>'}).join('')+'</div><label class="l" for="g-date">متى تريد إنجازه؟ (اختياري)</label><input type="date" id="g-date" value="'+esc(G.target)+'" min="'+today()+'"><div class="err" id="g-err">'+esc(G.err)+'</div><div class="row"><button type="button" class="btn" data-act="g3">ابنِ الخطة</button><button type="button" class="btn ghost" data-act="gback">رجوع</button></div>'}else{h+='<h2>خطتك المقترحة</h2><p class="small">عدّل أي خطوة لتناسبك.</p>';G.steps.forEach(function(s,i){h+='<div class="stepin"><div class="d">'+fmtDate(s.date)+'</div><input type="text" id="g-step-'+i+'" data-si="'+i+'" value="'+esc(s.text)+'" maxlength="200"></div>'});h+='<div class="row"><button type="button" class="btn" data-act="gsave">احفظ الخطة</button><button type="button" class="btn ghost" data-act="gback">رجوع</button></div>'}return h+'</div>'}
+function renderGuide(){ $('#guideBody').innerHTML=(S.plan?planCard():'')+wizard();var ta=$('#g-text');if(ta)$('#care').hidden=!needsCare(ta.value)}
+document.addEventListener('click',function(e){var b=e.target.closest('[data-act]');if(!b)return;var a=b.dataset.act;if(a==='topic'){chosenTopic=b.dataset.id;renderStart()}else if(a==='adopt'){var t=TOPICS.filter(function(x){return x.id===chosenTopic})[0];if(t){S.task=t.first;save();go('daily')}}else if(a==='read'){S.read[b.dataset.id]=true;save();b.disabled=true;b.textContent='تمت القراءة';var tag=$('#tag-'+b.dataset.id);if(tag){tag.textContent='تمت القراءة';tag.classList.add('ok')}}else if(a==='done'){var t0=today();if(S.done[t0])delete S.done[t0];else S.done[t0]=true;save();renderDaily()}else if(a==='suggest'){S.sug=(S.sug||0)+1;S.task=DEFAULTS[S.sug%DEFAULTS.length];save();renderDaily()}else if(a==='savetask'){var v=$('#taskInput').value.trim();if(v){S.task=v;save()}renderDaily()}else if(a==='g1'){var lines=G.text.split(/\n+/).map(function(s){return s.trim()}).filter(Boolean).slice(0,8);if(!lines.length){G.err='اكتب فكرة واحدة على الأقل.';$('#g-err').textContent=G.err;return}if(lines.join('|')!==G.lines.join('|')){G.cats=lines.map(function(){return null});G.goal=null}G.lines=lines;G.err='';G.step=2;renderGuide();window.scrollTo(0,0)}else if(a==='cat'){var i=+b.dataset.i;G.cats[i]=(G.cats[i]===b.dataset.c)?null:b.dataset.c;renderGuide()}else if(a==='g2'){var c=candidates();if(G.goal===null||c.indexOf(G.goal)<0)G.goal=c[0];G.err='';G.step=3;renderGuide();window.scrollTo(0,0)}else if(a==='goal'){G.goal=+b.dataset.i;renderGuide()}else if(a==='g3'){if(G.goal===null){G.err='اختر ما تريد العمل عليه.';$('#g-err').textContent=G.err;return}G.steps=buildSteps(G.lines[G.goal],G.target);G.err='';G.step=4;renderGuide();window.scrollTo(0,0)}else if(a==='gback'){G.step=Math.max(1,G.step-1);G.err='';renderGuide()}else if(a==='gsave'){S.plan={goal:G.lines[G.goal],steps:G.steps.map(function(s){return{text:s.text.trim()||'خطوة',date:s.date,done:false}})};save();G=freshG();renderGuide();window.scrollTo(0,0)}else if(a==='planfirst'){var next=S.plan.steps.filter(function(s){return !s.done})[0];if(next){S.task=next.text;save();go('daily')}}});
+document.addEventListener('input',function(e){var el=e.target;if(el.id==='g-text'){G.text=el.value;$('#care').hidden=!needsCare(el.value)}else if(el.id==='g-date'){G.target=el.value}else if(el.dataset&&el.dataset.si!==undefined){G.steps[+el.dataset.si].text=el.value}});document.addEventListener('change',function(e){var el=e.target;if(el.dataset&&el.dataset.plan!==undefined&&S.plan){S.plan.steps[+el.dataset.plan].done=el.checked;save();var c=S.plan.steps.filter(function(s){return s.done}).length;$('#planCount').textContent='أنجزت '+n(c)+' من '+n(S.plan.steps.length)}}});renderStart();renderLessons();renderStories();show();})();
 </script>
-
-</body></html>
+<script>
+if('serviceWorker'in navigator){window.addEventListener('load',function(){navigator.serviceWorker.register('./sw.js').catch(function(){})})}
+</script>
+</body>
+</html>
